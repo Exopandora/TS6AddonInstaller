@@ -1,14 +1,15 @@
-# TS5 Addon Installer #
-The TS5 Addon Installer is an unofficial tool that simplifies the process of installing and managing addons for TeamSpeak 5.
-It features a builtin patcher to re-enable addon support for the latest versions of TeamSpeak 5.
+# TS6 Addon Installer #
+The TS6 Addon Installer is an unofficial tool that simplifies the process of installing and managing addons for TeamSpeak 6.
+It features a builtin patcher to re-enable addon support for the latest versions of TeamSpeak 6.
 
-⚠️ Addons need to be reinstalled after every TeamSpeak update
+> [!IMPORTANT]
+> Addons need to be reinstalled after every TeamSpeak update
 
 ## Installing Addons ##
-The TS5 Addon Installer can automatically download and install addons or install them from zip files.
+The TS6 Addon Installer can automatically download and install addons or install them from zip files.
 
 ### Automatic Download ###
-1. Select your TS5 installation directory
+1. Select your TS6 installation directory
 2. Select the addon you want to install
 3. Optional: Select a specific version
    1. Click on "Load"
@@ -16,24 +17,24 @@ The TS5 Addon Installer can automatically download and install addons or install
 4. Click on "Install"
 
 ### Local File or Folder ###
-1. Select your TS5 installation directory
+1. Select your TS6 installation directory
 2. Select "Local Addon"
 3. Select the addon you want to install
 4. Click "Install"
 
 ## Uninstalling Addons ##
-The TS5 Addon Installer can automatically detect addons you have already installed with the installer and gives you the option to uninstall them again.
+The TS6 Addon Installer can automatically detect addons you have already installed with the installer and gives you the option to uninstall them again.
 
 1. Select the "Uninstall" tab
-2. Select your TS5 installation directory
+2. Select your TS6 installation directory
 3. Click on "Load"
 4. Select the addon you want to uninstall
 5. Click on "Uninstall"
 
 ## Command Line Interface ##
-The TS5 Addon Installer can be used from the command line with the following usage pattern:  
+The TS6 Addon Installer can be used from the command line with the following usage pattern:  
 ```shell
-$ java -jar TS5AddonInstaller.jar [OPTIONS] <TEAMSPEAK_PATH>
+$ java -jar TS6AddonInstaller.jar [OPTIONS] <TEAMSPEAK_PATH>
 ```
 
 | Option | Arguments | Description |
@@ -47,19 +48,13 @@ $ java -jar TS5AddonInstaller.jar [OPTIONS] <TEAMSPEAK_PATH>
 | yes, y | n/a|  Automatically answers all prompts with 'yes' |
 
 ## Compatibility ##
-| TeamSpeak | Windows | Linux | MacOS |
-| ------- | ------- | ----- | ----- |
-| Beta 77 | 2.5.0+ | 2.5.0+ | 2.5.0+ |
-| Beta 76 | 2.4.0+ | 2.4.0+ | 2.4.0+ |
-| Beta 75 | 2.3.0+ | 2.3.0+ | 2.3.0+ |
-| Beta 74 | 2.2.0+ | 2.2.0+ | 2.2.0+ |
-| Beta 73 | 2.1.0+ | 2.1.0+ | 2.1.0+ |
-| Beta 72 | 2.0.0+ | 2.0.0+ | n/a |
-| Beta 71 | ❌ | ❌ | n/a |
-| Beta 70 | 1.0.0 - 2.0.0 | 1.0.0 - 2.0.0 | 1.0.0 - 2.0.0 |
+| TeamSpeak | Windows | Linux  | MacOS |
+| --------- | ------- | ------ | ----- |
+| Beta 2 | 3.0.0+ | 3.0.0+ | 3.0.0+ |
+| Beta 1 | ❌ | ❌ | ❌ |
 
 ## For Developers ##
-If you want your addon to be compatible with the TS5 Addon Installer you need to create a new file called `addon.json` for your addon.
+If you want your addon to be compatible with the TS6 Addon Installer you need to create a new file called `addon.json` for your addon.
 It marks the root of your addon source and needs to be distributed inside your addon artifact.
 The `addon.json` contains the following attributes:
 
@@ -85,14 +80,14 @@ Example:
 	"injection_point": "HEAD",
 	"inject_at": "TAIL",
 	"sources": "src/",
-	"installer": "~2.0.0",
-	"teamspeak": "5.0.0-beta73"
+	"installer": "~3.0.0",
+	"teamspeak": "6.0.0-beta2"
 }
 ```
 A full example addon can be found [here](https://github.com/Exopandora/BetterChat)
 
 ## Patches ##
-The installer features a builtin patcher to re-enable addon support for the latest versions of TeamSpeak 5.
+The installer features a builtin patcher to re-enable addon support for the latest versions of TeamSpeak 6.
 Currently, the following patches are included with the installer:
 - File validation bypass (does not include unknown file check bypass)
 - Domain validation bypass
@@ -104,8 +99,11 @@ Currently, the following patches are included with the installer:
 
 ### Windows exe ###
 1. Run `gradlew createExe` in the root directory of this repository
-2. The windows exe can be found in `./build/launch4j/`
+2. The Windows exe can be found in `./build/launch4j/`
 
 ### Universal jar ###
 1. Run `gradlew build` in the root directory of this repository
 2. The universal jar can be found in `./build/libs/`
+
+## Acknowledgements
+Based on [TS5AddonInstaller](https://github.com/FelixVolo/TS5AddonInstaller) made by [FelixVolo](https://github.com/FelixVolo)

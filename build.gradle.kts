@@ -9,7 +9,7 @@ plugins {
 	id("com.gradleup.shadow") version "8.3.0"
 }
 
-project.version = "2.6.0" // TS5AddonInstaller.VERSION
+project.version = "3.0.0" // TS6AddonInstaller.VERSION
 
 repositories {
 	mavenCentral()
@@ -28,7 +28,7 @@ idea {
 	}
 }
 
-val main = "com.github.felixvolo.ts5ai.TS5AddonInstaller"
+val main = "com.github.exopandora.ts6ai.TS6AddonInstaller"
 
 application {
 	mainClass = main
@@ -56,7 +56,7 @@ tasks.withType<DefaultLaunch4jTask> {
 	jarTask = tasks.named("shadowJar").get()
 	manifest = "$projectDir/${project.name}.manifest"
 	copyright = "MIT License"
-	companyName = "FelixVolo"
+	companyName = "Exopandora"
 	fileDescription = project.name
 	productName = project.name
 	internalName = project.name
