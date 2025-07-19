@@ -1,8 +1,15 @@
 package com.github.exopandora.ts6ai.model;
 
-import static com.github.exopandora.ts6ai.util.Util.OBJECT_MAPPER;
-import static java.nio.file.StandardCopyOption.COPY_ATTRIBUTES;
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.github.exopandora.ts6ai.model.Patcher.TS6Patch.FilePatch;
+import com.github.exopandora.ts6ai.model.Patcher.TS6Patch.FilePatch.Patch;
+import com.github.exopandora.ts6ai.util.OS;
+import com.github.exopandora.ts6ai.util.Util;
+import com.vdurmont.semver4j.Semver;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,14 +26,9 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.github.exopandora.ts6ai.model.Patcher.TS6Patch.FilePatch;
-import com.github.exopandora.ts6ai.model.Patcher.TS6Patch.FilePatch.Patch;
-import com.github.exopandora.ts6ai.util.OS;
-import com.github.exopandora.ts6ai.util.Util;
-import com.vdurmont.semver4j.Semver;
+import static com.github.exopandora.ts6ai.util.Util.OBJECT_MAPPER;
+import static java.nio.file.StandardCopyOption.COPY_ATTRIBUTES;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class Patcher {
 	public static void patch(String installDir, Semver ts6Version) throws Exception {
@@ -89,7 +91,7 @@ public class Patcher {
 			File file = new File(installDir, entry.getKey());
 			FilePatch patch = entry.getValue();
 			String md5 = Util.md5sum(file);
-			if(md5.equalsIgnoreCase(patch.getVanilla())) {
+			if(md5.equalsIgnoreCase(patch.getVanilla()) || patch.getMigrations().stream().anyMatch(md5::equalsIgnoreCase)) {
 				patchesToApply.add(new SimpleEntry<File, FilePatch>(file, patch));
 			} else if(!md5.equalsIgnoreCase(patch.getPatched())) {
 				throw new IllegalStateException("Corrupted file " + entry.getKey());
@@ -182,15 +184,18 @@ public class Patcher {
 		public static class FilePatch {
 			private final String vanilla;
 			private final String patched;
+			private final List<String> migrations;
 			private final List<Patch> patches;
 			
 			public FilePatch(
 				@JsonProperty("vanilla") String vanilla,
 				@JsonProperty("patched") String patched,
+				@JsonSetter(nulls = Nulls.AS_EMPTY) @JsonProperty("migrations") List<String> migrations,
 				@JsonProperty("patches") List<Patch> patches
 			) {
 				this.vanilla = vanilla;
 				this.patched = patched;
+				this.migrations = migrations;
 				this.patches = patches;
 			}
 			
@@ -202,13 +207,17 @@ public class Patcher {
 				return this.patched;
 			}
 			
+			public List<String> getMigrations() {
+				return this.migrations;
+			}
+			
 			public List<Patch> getPatches() {
 				return this.patches;
 			}
 			
 			@Override
 			public int hashCode() {
-				return Objects.hash(this.patched, this.patches, this.vanilla);
+				return Objects.hash(this.patched, this.patches, this.migrations, this.vanilla);
 			}
 			
 			public static class Patch {
