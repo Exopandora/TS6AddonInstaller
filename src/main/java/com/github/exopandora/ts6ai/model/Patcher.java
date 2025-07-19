@@ -91,7 +91,7 @@ public class Patcher {
 			String md5 = Util.md5sum(file);
 			if(md5.equalsIgnoreCase(patch.getVanilla())) {
 				patchesToApply.add(new SimpleEntry<File, FilePatch>(file, patch));
-			} else if(!md5.equalsIgnoreCase(patch.getPatched())){
+			} else if(!md5.equalsIgnoreCase(patch.getPatched())) {
 				throw new IllegalStateException("Corrupted file " + entry.getKey());
 			}
 		}
@@ -147,8 +147,7 @@ public class Patcher {
 		}
 	}
 	
-	public static class TS6Patch
-	{
+	public static class TS6Patch {
 		private final Map<String, FilePatch> windows;
 		private final Map<String, FilePatch> linux;
 		private final Map<String, FilePatch> macos;
