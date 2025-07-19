@@ -50,7 +50,7 @@ public class Patcher {
 							Files.move(backup.toPath(), file.toPath(), REPLACE_EXISTING);
 						}
 					}
-					throw new IllegalStateException("Could not patch file " + entry.getKey(), e);
+					throw new IllegalStateException("Could not patch file \"" + entry.getKey() + "\"", e);
 				}
 			}
 		}
@@ -94,7 +94,7 @@ public class Patcher {
 			if(md5.equalsIgnoreCase(patch.getVanilla()) || patch.getMigrations().stream().anyMatch(md5::equalsIgnoreCase)) {
 				patchesToApply.add(new SimpleEntry<File, FilePatch>(file, patch));
 			} else if(!md5.equalsIgnoreCase(patch.getPatched())) {
-				throw new IllegalStateException("Corrupted file " + entry.getKey());
+				throw new IllegalStateException("Corrupted file \"" + entry.getKey() + "\"");
 			}
 		}
 		return patchesToApply;
