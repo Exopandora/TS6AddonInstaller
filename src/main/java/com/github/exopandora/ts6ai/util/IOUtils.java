@@ -5,7 +5,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -24,9 +30,10 @@ public class IOUtils {
 	}
 	
 	public static String toString(InputStream inputStream) throws IOException {
-		StringOutputStream outputStream = new StringOutputStream();
-		copy(inputStream, outputStream);
-		return outputStream.toString();
+		StringWriter writer = new StringWriter();
+		InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+		copy(reader, writer);
+		return writer.toString();
 	}
 	
 	public static void writeFile(File file, String contents) throws IOException {
@@ -43,5 +50,15 @@ public class IOUtils {
 		}
 		inputStream.close();
 		outputStream.close();
+	}
+	
+	public static void copy(Reader reader, Writer writer) throws IOException {
+		char[] buffer = new char[8192];
+		int length;
+		while((length = reader.read(buffer)) != -1) {
+			writer.write(buffer, 0, length);
+		}
+		reader.close();
+		writer.close();
 	}
 }

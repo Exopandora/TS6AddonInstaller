@@ -1,12 +1,6 @@
 package com.github.exopandora.ts6ai.model;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringReader;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLConnection;
-
+import com.github.exopandora.ts6ai.util.IOUtils;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -14,8 +8,13 @@ import org.dom4j.QName;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
-import com.github.exopandora.ts6ai.util.IOUtils;
-import com.github.exopandora.ts6ai.util.StringOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class Packer {
 	private static final String NODE_SCRIPT = "script";
@@ -32,8 +31,8 @@ public class Packer {
 		packElement(root, source, addonRoot, addon.getSources());
 		XMLWriter writer = new XMLWriter();
 		writer.setEscapeText(false);
-		StringOutputStream output = new StringOutputStream();
-		writer.setOutputStream(output);
+		StringWriter output = new StringWriter();
+		writer.setWriter(output);
 		for(Element element : root.elements()) {
 			writer.write(element);
 		}
