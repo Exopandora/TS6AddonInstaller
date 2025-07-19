@@ -54,7 +54,7 @@ public class Installer {
 		}
 		if(addon.getInstallerVersion().isPresent()) {
 			Requirement requirement = addon.getInstallerVersion().get();
-			if(!VERSION.satisfies(requirement)) {
+			if(!new Semver(VERSION).satisfies(requirement) && !VERSION.equals("DEV")) {
 				throw new Exception("Addon " + addon.getName() + " requires installer version " + requirement);
 			}
 		}

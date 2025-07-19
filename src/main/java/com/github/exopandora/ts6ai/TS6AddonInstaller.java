@@ -1,7 +1,8 @@
 package com.github.exopandora.ts6ai;
 
-import javax.swing.SwingUtilities;
-
+import com.github.exopandora.ts6ai.cli.CLIController;
+import com.github.exopandora.ts6ai.controller.MainController;
+import com.github.exopandora.ts6ai.view.Window;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -10,14 +11,33 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.github.exopandora.ts6ai.cli.CLIController;
-import com.github.exopandora.ts6ai.controller.MainController;
-import com.github.exopandora.ts6ai.view.Window;
-import com.vdurmont.semver4j.Semver;
+import javax.swing.*;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
 
-public class TS6AddonInstaller
-{
-	public static final Semver VERSION = new Semver("3.0.0");
+public class TS6AddonInstaller {
+	public static final String VERSION;
+	
+	static {
+		try {
+			ClassLoader classLoader = TS6AddonInstaller.class.getClassLoader();
+			List<URL> manifests = enumerationToList(classLoader.getResources("META-INF/MANIFEST.MF"));
+			if(manifests.size() == 1) {
+				Manifest manifest = new Manifest(manifests.get(0).openStream());
+				Attributes attributes = manifest.getMainAttributes();
+				VERSION = attributes.getValue("Implementation-Version");
+			} else {
+				VERSION = "DEV";
+			}
+		} catch(IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 	
 	public static void main(String... args) {
 		Options options = new Options();
@@ -109,5 +129,13 @@ public class TS6AddonInstaller
 		if(cmd.getArgList().size() != count) {
 			throw new ParseException("Invalid installation path");
 		}
+	}
+	
+	private static <T> List<T> enumerationToList(Enumeration<T> enumeration) {
+		List<T> list = new LinkedList<T>();
+		while(enumeration.hasMoreElements()) {
+			list.add(enumeration.nextElement());
+		}
+		return list;
 	}
 }

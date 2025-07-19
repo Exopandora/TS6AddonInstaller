@@ -9,7 +9,7 @@ plugins {
 	id("com.gradleup.shadow") version "8.3.0"
 }
 
-project.version = "3.0.0" // TS6AddonInstaller.VERSION
+project.version = "3.0.0"
 
 repositories {
 	mavenCentral()
@@ -43,7 +43,12 @@ dependencies {
 
 tasks.withType<Jar> {
 	manifest {
-		attributes["Main-Class"] = main
+		attributes(
+			mapOf(
+				"Main-Class" to main,
+				"Implementation-Version" to project.version
+			)
+		)
 	}
 	
 	from("LICENSE")
