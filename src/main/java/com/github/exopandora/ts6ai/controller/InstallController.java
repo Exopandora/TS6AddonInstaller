@@ -161,6 +161,8 @@ public class InstallController {
 	private void install(ActionEvent event) {
 		JButton installButton = this.installPane.getInstallButton();
 		installButton.setEnabled(false);
+		String installButtonText = installButton.getText();
+		installButton.setText("Installing...");
 		SwingWorker<Optional<Addon>, Void> worker = new SwingWorker<Optional<Addon>, Void>() {
 			@Override
 			protected Optional<Addon> doInBackground() throws Exception {
@@ -193,6 +195,7 @@ public class InstallController {
 					cause.printStackTrace();
 					JOptionPane.showMessageDialog(null, cause.getMessage(), TITLE, ERROR_MESSAGE);
 				}
+				installButton.setText(installButtonText);
 				installButton.setEnabled(true);
 			}
 		};
