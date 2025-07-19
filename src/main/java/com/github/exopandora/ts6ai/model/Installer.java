@@ -66,18 +66,21 @@ public class Installer {
 			String index = IOUtils.readFile(indexPath);
 			List<InstalledAddon> installedAddons = findInstalledAddons(index);
 			Collections.reverse(installedAddons);
-			for(InstalledAddon installedAddon : installedAddons) {
+			Iterator<InstalledAddon> installedAddonsIterator = installedAddons.iterator();
+			while(installedAddonsIterator.hasNext()) {
+				InstalledAddon installedAddon = installedAddonsIterator.next();
 				if(installedAddon.getId().equals(addon.getId())) {
 					int comparison = installedAddon.getVersion().compareTo(addon.getVersion());
 					if(!conflictHandler.resolve(addon, installedAddon, comparison)) {
 						return Optional.empty();
 					}
 					index = removeAddonFromIndex(index, installedAddon);
+					installedAddonsIterator.remove();
 				}
 			}
 			String packedAddon = Packer.pack(addon, injectionString, addonSource, addonRoot);
 			String wrappedAddon = wrapAddonInject(packedAddon, addon, UUID.randomUUID());
-			index = addon.getInjectAt().inject(index, wrappedAddon, addon.getInjectionPoint());
+			index = addon.getInjectAt().inject(index, wrappedAddon, addon.getInjectionPoint(), installedAddons);
 			IOUtils.writeFile(indexPath, index);
 			return Optional.of(addon);
 		} catch(Exception e) {

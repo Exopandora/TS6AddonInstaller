@@ -49,4 +49,8 @@ public class Util {
 		}
 		return builder.toString();
 	}
+	
+	public static int clamp(int input, int min, int max) {
+		return input < min ? min : Math.min(input, max);
+	}
 }
