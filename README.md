@@ -48,10 +48,11 @@ $ java -jar TS6AddonInstaller.jar [OPTIONS] <TEAMSPEAK_PATH>
 | yes, y | n/a|  Automatically answers all prompts with 'yes' |
 
 ## Compatibility ##
-| TeamSpeak | Windows | Linux  | MacOS |
-| --------- | ------- | ------ | ----- |
-| Beta 2 | 3.0.0+ | 3.0.0+ | 3.0.0+ |
-| Beta 1 | ❌ | ❌ | ❌ |
+| TeamSpeak | Windows | Linux  | MacOS  |
+|-----------|---------|--------|--------|
+| Beta 3    | 3.1.0+  | 3.1.0+ | 3.1.0+ |
+| Beta 2    | 3.0.0+  | 3.0.0+ | 3.0.0+ |
+| Beta 1    | ❌       | ❌      | ❌      |
 
 ## For Developers ##
 If you want your addon to be compatible with the TS6 Addon Installer you need to create a new file called `addon.json` for your addon.
