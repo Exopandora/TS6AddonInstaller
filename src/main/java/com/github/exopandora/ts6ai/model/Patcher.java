@@ -53,6 +53,20 @@ public class Patcher {
 					throw new IllegalStateException("Could not patch file \"" + entry.getKey() + "\"", e);
 				}
 			}
+			if(!successfulPatches.isEmpty() && OS.getOrThrow() == OS.MAC_OS) {
+				try {
+					Process process = new ProcessBuilder()
+						.command("codesign", "--remove-signature", installDir)
+						.inheritIO()
+						.start();
+					int result = process.waitFor();
+					if(result != 0) {
+						throw new Exception("Failed to remove app signature. Error code " + result);
+					}
+				} catch(Throwable e) {
+					throw new Exception("Could not remove app signature. Please make sure you started the installer with admin privileges.", e);
+				}
+			}
 		}
 	}
 	
@@ -93,7 +107,7 @@ public class Patcher {
 			String md5 = Util.md5sum(file);
 			if(md5.equalsIgnoreCase(patch.getVanilla()) || patch.getMigrations().stream().anyMatch(md5::equalsIgnoreCase)) {
 				patchesToApply.add(new SimpleEntry<File, FilePatch>(file, patch));
-			} else if(!md5.equalsIgnoreCase(patch.getPatched())) {
+			} else if(!md5.equalsIgnoreCase(patch.getPatched()) && !md5.equalsIgnoreCase(patch.getUnsigned())) {
 				throw new IllegalStateException("Corrupted file \"" + entry.getKey() + "\"");
 			}
 		}
@@ -184,17 +198,20 @@ public class Patcher {
 		public static class FilePatch {
 			private final String vanilla;
 			private final String patched;
+			private final String unsigned;
 			private final List<String> migrations;
 			private final List<Patch> patches;
 			
 			public FilePatch(
 				@JsonProperty("vanilla") String vanilla,
 				@JsonProperty("patched") String patched,
+				@JsonProperty("unsigned") String unsigned,
 				@JsonSetter(nulls = Nulls.AS_EMPTY) @JsonProperty("migrations") List<String> migrations,
 				@JsonProperty("patches") List<Patch> patches
 			) {
 				this.vanilla = vanilla;
 				this.patched = patched;
+				this.unsigned = unsigned;
 				this.migrations = migrations;
 				this.patches = patches;
 			}
@@ -207,6 +224,10 @@ public class Patcher {
 				return this.patched;
 			}
 			
+			public String getUnsigned() {
+				return this.unsigned;
+			}
+			
 			public List<String> getMigrations() {
 				return this.migrations;
 			}
@@ -217,7 +238,7 @@ public class Patcher {
 			
 			@Override
 			public int hashCode() {
-				return Objects.hash(this.patched, this.patches, this.migrations, this.vanilla);
+				return Objects.hash(this.vanilla, this.patched, this.unsigned, this.migrations, this.patches);
 			}
 			
 			public static class Patch {
