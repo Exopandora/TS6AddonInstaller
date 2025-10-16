@@ -10,6 +10,7 @@ plugins {
 }
 
 project.version = "3.1.0"
+group = "com.github.exopandora"
 
 repositories {
 	mavenCentral()
