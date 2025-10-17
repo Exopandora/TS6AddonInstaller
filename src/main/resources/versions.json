@@ -1,30 +1,48 @@
 {
 	"windows": {
-		"d01bad01d344cc5c277c724d1452ed87": "6.0.0-beta3.1",
-		"074931ea8daba727ae107708bf13ff29": "6.0.0-beta3.1",
-		"f4e5bfc40b79598366bf4bee2406b446": "6.0.0-beta3",
-		"7a1dcf208b35526daecfd492becf8add": "6.0.0-beta3",
-		"97150cbd83bf3bcbedd393aa8360ac2b": "6.0.0-beta2",
-		"ce14c468dc3a676a4834256af2d8c660": "6.0.0-beta2"
+		"6.0.0-beta3.1": [
+			"d01bad01d344cc5c277c724d1452ed87",
+			"074931ea8daba727ae107708bf13ff29"
+		],
+		"6.0.0-beta3": [
+			"f4e5bfc40b79598366bf4bee2406b446",
+			"7a1dcf208b35526daecfd492becf8add"
+		],
+		"6.0.0-beta2": [
+			"97150cbd83bf3bcbedd393aa8360ac2b",
+			"ce14c468dc3a676a4834256af2d8c660"
+		]
 	},
 	"linux": {
-		"cf2b33a83c69705f991541279b640a05": "6.0.0-beta3.1",
-		"d8febf33a0b1df8bc2d896cb9d2ff17e": "6.0.0-beta3.1",
-		"2138d9afcbf2f8cc938e51e0f884bb95": "6.0.0-beta3",
-		"c644e1f07d95026a842a9905cf11e0ef": "6.0.0-beta3",
-		"66614666f7d51aadf0f179e784d1a212": "6.0.0-beta2",
-		"c75efb6e2e5dba51d201a3b22fbd5f0b": "6.0.0-beta2",
-		"94f195981e079f47bc30fb0286a90195": "6.0.0-beta2"
+		"6.0.0-beta3.1": [
+			"cf2b33a83c69705f991541279b640a05",
+			"d8febf33a0b1df8bc2d896cb9d2ff17e"
+		],
+		"6.0.0-beta3": [
+			"2138d9afcbf2f8cc938e51e0f884bb95",
+			"c644e1f07d95026a842a9905cf11e0ef"
+		],
+		"6.0.0-beta2": [
+			"66614666f7d51aadf0f179e784d1a212",
+			"c75efb6e2e5dba51d201a3b22fbd5f0b",
+			"94f195981e079f47bc30fb0286a90195"
+		]
 	},
 	"macos": {
-		"272dc07545a902887a213b0b23ba1319": "6.0.0-beta3.1",
-		"395442031d4e2aa3101151394c5ef730": "6.0.0-beta3.1",
-		"e1201a0cff0e97c70ec5f93f887a4b9e": "6.0.0-beta3.1",
-		"a7552cbbbde09edf1980bac7f4934848": "6.0.0-beta3",
-		"1b1c111456029371b524629148f2b32f": "6.0.0-beta3",
-		"03a8084d4ae397fa9fc4e4c5d726b3c1": "6.0.0-beta3",
-		"eb1fa9d6b03100a16a769a69a2f94815": "6.0.0-beta2",
-		"b902788dacf11135a7980056373a0929": "6.0.0-beta2",
-		"501761569f154597c3476e126013c971": "6.0.0-beta2"
+		"6.0.0-beta3.1": [
+			"272dc07545a902887a213b0b23ba1319",
+			"395442031d4e2aa3101151394c5ef730",
+			"e1201a0cff0e97c70ec5f93f887a4b9e"
+		],
+		"6.0.0-beta3": [
+			"a7552cbbbde09edf1980bac7f4934848",
+			"1b1c111456029371b524629148f2b32f",
+			"03a8084d4ae397fa9fc4e4c5d726b3c1"
+		],
+		"6.0.0-beta2": [
+			"eb1fa9d6b03100a16a769a69a2f94815",
+			"b902788dacf11135a7980056373a0929",
+			"501761569f154597c3476e126013c971"
+		]
 	}
 }
