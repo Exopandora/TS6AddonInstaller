@@ -41,15 +41,7 @@ public class Patcher {
 					applyFilePatches(entry.getKey(), entry.getValue());
 					successfulPatches.add(entry);
 				} catch(Exception e) {
-					// Revert changes
-					for(Entry<File, FilePatch> successfulPatch : successfulPatches) {
-						File file = successfulPatch.getKey();
-						FilePatch filePatch = successfulPatch.getValue();
-						File backup = new File(successfulPatch.getKey() + ".bak");
-						if(backup.exists() && filePatch.getVanilla().equals(Util.md5sum(backup))) {
-							Files.move(backup.toPath(), file.toPath(), REPLACE_EXISTING);
-						}
-					}
+					revertPatches(successfulPatches);
 					throw new IllegalStateException("Could not patch file \"" + entry.getKey() + "\"", e);
 				}
 			}
@@ -66,6 +58,17 @@ public class Patcher {
 				} catch(Throwable e) {
 					throw new Exception("Could not remove app signature. Please make sure you started the installer with admin privileges.", e);
 				}
+			}
+		}
+	}
+	
+	private static void revertPatches(Set<Entry<File, FilePatch>> successfulPatches) throws IOException {
+		for(Entry<File, FilePatch> successfulPatch : successfulPatches) {
+			File file = successfulPatch.getKey();
+			FilePatch filePatch = successfulPatch.getValue();
+			File backup = new File(successfulPatch.getKey() + ".bak");
+			if(backup.exists() && filePatch.getVanilla().equals(Util.md5sum(backup))) {
+				Files.move(backup.toPath(), file.toPath(), REPLACE_EXISTING);
 			}
 		}
 	}
