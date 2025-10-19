@@ -56,6 +56,7 @@ public class Patcher {
 						throw new Exception("Failed to remove app signature. Error code " + result);
 					}
 				} catch(Throwable e) {
+					revertPatches(successfulPatches);
 					throw new Exception("Could not remove app signature. Please make sure you started the installer with admin privileges.", e);
 				}
 			}
