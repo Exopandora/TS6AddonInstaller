@@ -1,11 +1,10 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import edu.sc.seis.launch4j.tasks.DefaultLaunch4jTask
 
 plugins {
 	id("application")
 	id("eclipse")
 	id("idea")
-	id("edu.sc.seis.launch4j") version "2.5.3"
+	id("edu.sc.seis.launch4j") version "4.0.0"
 	id("com.gradleup.shadow") version "8.3.0"
 }
 
@@ -57,9 +56,9 @@ tasks.withType<Jar> {
 	duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
-tasks.withType<DefaultLaunch4jTask> {
-	mainClassName = mainClassName
-	jarTask = tasks.named("shadowJar").get()
+launch4j {
+    mainClassName = main
+	setJarTask(tasks.named<ShadowJar>("shadowJar").get())
 	manifest = "$projectDir/${project.name}.manifest"
 	copyright = "MIT License"
 	companyName = "Exopandora"
