@@ -6,10 +6,10 @@ import com.github.exopandora.ts6ai.view.Window;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.help.HelpFormatter;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -45,7 +45,7 @@ public class TS6AddonInstaller {
 			.longOpt("patch")
 			.desc("Patches the TeamSpeak installation to enable addon support.")
 			.required(false)
-			.build();
+			.get();
 		options.addOption(patch);
 		Option install = Option.builder()
 			.longOpt("install")
@@ -54,7 +54,7 @@ public class TS6AddonInstaller {
 			.hasArg(true)
 			.numberOfArgs(1)
 			.argName("addon")
-			.build();
+			.get();
 		options.addOption(install);
 		Option uninstall = Option.builder()
 			.longOpt("uninstall")
@@ -63,28 +63,28 @@ public class TS6AddonInstaller {
 			.hasArg(true)
 			.numberOfArgs(1)
 			.argName("addon")
-			.build();
+			.get();
 		options.addOption(uninstall);
 		Option listInstalled = Option.builder()
 			.longOpt("list-installed")
 			.desc("Displays installed addons.")
-			.build();
+			.get();
 		options.addOption(listInstalled);
 		Option help = Option.builder("h")
 			.longOpt("help")
 			.desc("Displays this help text.")
-			.build();
+			.get();
 		options.addOption(help);
 		Option force = Option.builder("y")
 			.longOpt("yes")
 			.desc("Automatically answers all prompts with 'yes'.")
 			.required(false)
-			.build();
+			.get();
 		options.addOption(force);
 		Option version = Option.builder("v")
 			.longOpt("version")
 			.desc("Displays the version of the installer.")
-			.build();
+			.get();
 		options.addOption(version);
 		try {
 			CommandLineParser parser = new DefaultParser();
@@ -117,8 +117,12 @@ public class TS6AddonInstaller {
 	}
 	
 	private static void printHelp(Options options) {
-		HelpFormatter formatter = new HelpFormatter();
-		formatter.printHelp("TS6AddonInstaller [OPTIONS] <TEAMSPEAK_PATH>", options);
+		try {
+			HelpFormatter formatter = HelpFormatter.builder().get();
+			formatter.printHelp("TS6AddonInstaller [OPTIONS] <TEAMSPEAK_PATH>", "", options, "", true);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private static void requireSingleArg(CommandLine cmd) throws ParseException {
