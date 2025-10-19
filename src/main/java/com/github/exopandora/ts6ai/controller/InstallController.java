@@ -1,34 +1,5 @@
 package com.github.exopandora.ts6ai.controller;
 
-import static com.github.exopandora.ts6ai.util.Util.OBJECT_MAPPER;
-import static com.github.exopandora.ts6ai.view.Window.TITLE;
-import static javax.swing.JFileChooser.APPROVE_OPTION;
-import static javax.swing.JFileChooser.FILES_AND_DIRECTORIES;
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.YES_NO_OPTION;
-import static javax.swing.JOptionPane.YES_OPTION;
-
-import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.InputStream;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.exopandora.ts6ai.model.Addon;
 import com.github.exopandora.ts6ai.model.FolderAddonSource;
@@ -41,6 +12,33 @@ import com.github.exopandora.ts6ai.view.AddonEntry;
 import com.github.exopandora.ts6ai.view.AddonEntry.RemoteAddonEntry;
 import com.github.exopandora.ts6ai.view.InstallPane;
 import com.vdurmont.semver4j.Semver;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.InputStream;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static com.github.exopandora.ts6ai.util.Util.OBJECT_MAPPER;
+import static com.github.exopandora.ts6ai.view.Window.TITLE;
+import static javax.swing.JFileChooser.APPROVE_OPTION;
+import static javax.swing.JFileChooser.FILES_AND_DIRECTORIES;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
+import static javax.swing.JOptionPane.YES_OPTION;
 
 public class InstallController {
 	private final MainController mainController;
@@ -57,10 +55,8 @@ public class InstallController {
 		try {
 			InputStream addonsJson = Thread.currentThread().getContextClassLoader().getResourceAsStream("addons.json");
 			JsonNode node = OBJECT_MAPPER.readTree(addonsJson);
-			Iterator<Entry<String, JsonNode>> iterator = node.fields();
 			List<AddonEntry> addons = new ArrayList<AddonEntry>();
-			while(iterator.hasNext()) {
-				Entry<String, JsonNode> entry = iterator.next();
+			for(Entry<String, JsonNode> entry : node.properties()) {
 				if(entry.getValue().isTextual()) {
 					addons.add(new RemoteAddonEntry(entry.getKey(), new URI(entry.getValue().asText()).toURL()));
 				}

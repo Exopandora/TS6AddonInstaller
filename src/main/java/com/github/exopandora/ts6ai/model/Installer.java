@@ -184,7 +184,7 @@ public class Installer {
 	}
 	
 	public static List<Entry<Semver, String>> loadVersions(URL versionUrl) throws IOException {
-		Map<Semver, String> versionMap = OBJECT_MAPPER.readValue(versionUrl, new TypeReference<Map<Semver, String>>() {});
+		Map<Semver, String> versionMap = OBJECT_MAPPER.readValue(versionUrl.openStream(), new TypeReference<Map<Semver, String>>() {});
 		List<Entry<Semver, String>> versions = new ArrayList<Entry<Semver, String>>(versionMap.entrySet());
 		versions.sort(Entry.comparingByKey(Comparator.reverseOrder()));
 		return versions;
