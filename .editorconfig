@@ -1,3 +1,11 @@
 [*.json]
 indent_style = tab
 ij_continuation_indent_size = 4
+
+[*.java]
+ij_java_use_single_class_imports = true
+ij_java_class_count_to_use_import_on_demand = 9999
+ij_java_imports_layout = *,|,javax.**,java.**,|,$*
+ij_java_insert_inner_class_imports = false
+ij_java_layout_static_imports_separately = true
+ij_java_names_count_to_use_import_on_demand = 9999
