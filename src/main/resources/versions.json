@@ -1,5 +1,9 @@
 {
 	"windows": {
+		"6.0.0-beta3.4": [
+			"9033032e297c2ba73dbb674a792adaac",
+			"e662ab279f636aba17c9e4c98489cf1c"
+		],
 		"6.0.0-beta3.2": [
 			"0898855c6427deb5ae0a4858d6e5598c",
 			"2e84f86d312569b1acdaa2b53e3d3019"
@@ -18,6 +22,10 @@
 		]
 	},
 	"linux": {
+		"6.0.0-beta3.4": [
+			"f4cc5691bab6590d3e331bcc8bcdad9d",
+			"621f548bceeb71bd5cc9256e06a26636"
+		],
 		"6.0.0-beta3.2": [
 			"eabe113d13d9793da6e1addd591815d1",
 			"3937dc90aaf506795b5fb0202b8b2503"
@@ -37,6 +45,11 @@
 		]
 	},
 	"macos": {
+		"6.0.0-beta3.4": [
+			"7c289cb606b85dcd17b6a048ed912bbc",
+			"29b307a7f0a4c782eb07260695349a9e",
+			"b0c79eb926116a8e729d603f741c1760"
+		],
 		"6.0.0-beta3.2": [
 			"b5aa2ba3f1a8970438c3e947cf70754e",
 			"d5f66720a58ea135caff259a8d8cf169",
