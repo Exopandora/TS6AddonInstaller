@@ -144,6 +144,7 @@ public class Patcher {
 		return md5.equalsIgnoreCase(patch.getVanilla())
 			|| md5.equalsIgnoreCase(patch.getPatched())
 			|| (patch.getUnsigned() != null && md5.equalsIgnoreCase(patch.getUnsigned()))
+			|| (patch.getSigned() != null && md5.equalsIgnoreCase(patch.getSigned()))
 			|| patch.getMigrations().stream().anyMatch(md5::equalsIgnoreCase);
 	}
 	
@@ -232,6 +233,7 @@ public class Patcher {
 			private final String vanilla;
 			private final String patched;
 			private final String unsigned;
+			private final String signed;
 			private final List<String> migrations;
 			private final List<Patch> patches;
 			private final List<FilePatch> alternatives;
@@ -240,6 +242,7 @@ public class Patcher {
 				@JsonProperty("vanilla") String vanilla,
 				@JsonProperty("patched") String patched,
 				@JsonProperty("unsigned") String unsigned,
+				@JsonProperty("signed") String signed,
 				@JsonSetter(nulls = Nulls.AS_EMPTY) @JsonProperty("migrations") List<String> migrations,
 				@JsonProperty("patches") List<Patch> patches,
 				@JsonSetter(nulls = Nulls.AS_EMPTY) @JsonProperty("alternatives") List<FilePatch> alternatives
@@ -247,6 +250,7 @@ public class Patcher {
 				this.vanilla = vanilla;
 				this.patched = patched;
 				this.unsigned = unsigned;
+				this.signed = signed;
 				this.migrations = migrations;
 				this.patches = patches;
 				this.alternatives = alternatives;
@@ -263,6 +267,10 @@ public class Patcher {
 			public String getUnsigned() {
 				return this.unsigned;
 			}
+
+			public String getSigned() {
+				return this.signed;
+			}
 			
 			public List<String> getMigrations() {
 				return this.migrations;
@@ -278,7 +286,7 @@ public class Patcher {
 
 			@Override
 			public int hashCode() {
-				return Objects.hash(this.vanilla, this.patched, this.unsigned, this.migrations, this.patches, this.alternatives);
+				return Objects.hash(this.vanilla, this.patched, this.unsigned, this.signed, this.migrations, this.patches, this.alternatives);
 			}
 			
 			public static class Patch {
