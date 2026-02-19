@@ -37,16 +37,16 @@ The TS6 Addon Installer can be used from the command line with the following usa
 $ java -jar TS6AddonInstaller.jar [OPTIONS] <TEAMSPEAK_PATH>
 ```
 
-| Option | Arguments | Description |
-| ------ | --------- | ----------- |
-| help, h | n/a | Displays a help text for command line usage |
-| version, v | n/a| Displays the version of the installer |
-| install | \<addon\> | Installs an addon from zip, folder or url, and applies patches to the TeamSpeak installation if required |
-| uninstall | \<addon\> | Uninstalls an addon by id or name |
-| list-installed | n/a | Displays installed addons |
-| patch | n/a |  Patches the TeamSpeak installation to enable addon support |
-| yes, y | n/a|  Automatically answers all prompts with 'yes' |
-| dev | n/a | Enable development mode |
+| Option           | Arguments | Description                                                                                              |
+|------------------|-----------|----------------------------------------------------------------------------------------------------------|
+| help, h          | n/a       | Displays a help text for command line usage                                                              |
+| version, v       | n/a       | Displays the version of the installer                                                                    |
+| install          | \<addon\> | Installs an addon from zip, folder or url, and applies patches to the TeamSpeak installation if required |
+| uninstall        | \<addon\> | Uninstalls an addon by id or name                                                                        |
+| list-installed v | n/a       | Displays installed addons                                                                                |
+| patch            | n/a       | Patches the TeamSpeak installation to enable addon support                                               |
+| yes, y           | n/a       | Automatically answers all prompts with 'yes'                                                             |
+| dev              | n/a       | Enable development mode                                                                                  |
 
 ## Compatibility ##
 | TeamSpeak | Windows | Linux  | MacOS  |
@@ -64,17 +64,17 @@ If you want your addon to be compatible with the TS6 Addon Installer you need to
 It marks the root of your addon source and needs to be distributed inside your addon artifact.
 The `addon.json` contains the following attributes:
 
-| Attribute | Description |
-| --------- | ----------- |
-| name | Specifies the name of the addon |
-| id | Specifies the ID of the addon. Allowed characters: `A-Z`, `a-z`, `0-9` and `_` |
-| version | Specifies the version of the addon, following [semver](https://semver.org/) semantics |
-| inject | Specifies the file that contains the code that will be injected into the `index.html` |
-| injection_point | Specifies the html tag the addon will be injected in. This can either be `HEAD` or `BODY`. Defaults to `HEAD` |
-| inject_at | The position inside the html tag the addon will be injected in. This can eiter be `HEAD` or `TAIL`. Defaults to `TAIL` |
-| sources | Specifies a folder relative to the `addon.json` that contains the actual source files of the addon. |
-| installer | Optional: Specifies the required installer version for the addon, following [node-semver](https://github.com/npm/node-semver) semantics |
-| teamspeak | Optional: Specifies the required teamspeak version for the addon, following [node-semver](https://github.com/npm/node-semver) semantics |
+| Attribute       | Description                                                                                                                             |
+|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| name            | Specifies the name of the addon                                                                                                         |
+| id              | Specifies the ID of the addon. Allowed characters: `A-Z`, `a-z`, `0-9` and `_`                                                          |
+| version         | Specifies the version of the addon, following [semver](https://semver.org/) semantics                                                   |
+| inject          | Specifies the file that contains the code that will be injected into the `index.html`                                                   |
+| injection_point | Specifies the html tag the addon will be injected in. This can either be `HEAD` or `BODY`. Defaults to `HEAD`                           |
+| inject_at       | The position inside the html tag the addon will be injected in. This can eiter be `HEAD` or `TAIL`. Defaults to `TAIL`                  |
+| sources         | Specifies a folder relative to the `addon.json` that contains the actual source files of the addon.                                     |
+| installer       | Optional: Specifies the required installer version for the addon, following [node-semver](https://github.com/npm/node-semver) semantics |
+| teamspeak       | Optional: Specifies the required teamspeak version for the addon, following [node-semver](https://github.com/npm/node-semver) semantics |
 
 Example:
 ```json
