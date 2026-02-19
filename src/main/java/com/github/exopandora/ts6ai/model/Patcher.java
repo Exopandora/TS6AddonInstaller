@@ -45,29 +45,6 @@ public class Patcher {
 					throw new IllegalStateException("Could not patch file \"" + entry.getKey() + "\"", e);
 				}
 			}
-			if(!successfulPatches.isEmpty() && OS.getOrThrow() == OS.MAC_OS) {
-				try {
-					Process process = new ProcessBuilder()
-						.command("codesign", "--remove-signature", installDir)
-						.inheritIO()
-						.start();
-					int result = process.waitFor();
-					if(result != 0) {
-						throw new Exception("Failed to remove app signature. Error code " + result);
-					}
-					Process signProcess = new ProcessBuilder()
-						.command("codesign", "-fs", "-", installDir)
-						.inheritIO()
-						.start();
-					int signResult = signProcess.waitFor();
-					if(signResult != 0) {
-						throw new Exception("Failed to ad-hoc sign app. Error code " + signResult);
-					}
-				} catch(Throwable e) {
-					revertPatches(successfulPatches);
-					throw new Exception("Could not remove app signature. Please make sure you started the installer with admin privileges.", e);
-				}
-			}
 		}
 	}
 	
