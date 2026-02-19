@@ -35,7 +35,7 @@ public class Installer {
 	private static final String ADDON_DEFINITION_FILE_NAME = "addon.json";
 	private static final String INDEX = "index.html";
 	
-	public static Optional<Addon> install(IAddonSource addonSource, String installDir, ConflictHandler conflictHandler) throws Exception {
+	public static Optional<Addon> install(IAddonSource addonSource, String installDir, boolean devMode, ConflictHandler conflictHandler) throws Exception {
 		Semver ts6version = VersionIndex.findTeamSpeakVersion(installDir, OS.getOrThrow());
 		addonSource.open();
 		String addonJsonPath = findAddonJsonPath(addonSource);
@@ -54,7 +54,7 @@ public class Installer {
 		}
 		if(addon.getInstallerVersion().isPresent()) {
 			Requirement requirement = addon.getInstallerVersion().get();
-			if(!new Semver(VERSION).satisfies(requirement) && !VERSION.equals("DEV")) {
+			if(!new Semver(VERSION).satisfies(requirement) && !devMode) {
 				throw new Exception("Addon " + addon.getName() + " requires installer version " + requirement);
 			}
 		}

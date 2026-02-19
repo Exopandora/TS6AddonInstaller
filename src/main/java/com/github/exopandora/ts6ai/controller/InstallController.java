@@ -165,7 +165,7 @@ public class InstallController {
 				String installDir = InstallController.this.mainController.getInstallDir();
 				Installer.validateInstallationPath(installDir, true);
 				try(IAddonSource addonSource = InstallController.this.getAddonSource()) {
-					return Installer.install(addonSource, installDir, (addon, installedAddon, compareResult) -> {
+					return Installer.install(addonSource, installDir, InstallController.this.mainController.isDevMode(), (addon, installedAddon, compareResult) -> {
 						String message;
 						if(compareResult < 0) {
 							message = "An older version of " + addon.getName() + " is already installed. Do you want to update?\n" + installedAddon.getVersion() + " -> " + addon.getVersion();

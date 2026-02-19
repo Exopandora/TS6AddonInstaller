@@ -20,11 +20,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CLIController {
-	public static void install(String installDir, String addonPath, boolean force) {
+	public static void install(String installDir, String addonPath, boolean force, boolean devMode) {
 		try(Scanner scanner = new Scanner(System.in)) {
 			Installer.validateInstallationPath(installDir, true);
 			try(IAddonSource addonSource = parseAddonSource(addonPath)) {
-				Installer.install(addonSource, installDir, (addon, installedAddon, compareResult) -> {
+				Installer.install(addonSource, installDir, devMode, (addon, installedAddon, compareResult) -> {
 					if(force) {
 						return true;
 					}

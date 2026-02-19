@@ -86,6 +86,12 @@ public class TS6AddonInstaller {
 			.desc("Displays the version of the installer.")
 			.get();
 		options.addOption(version);
+		Option devMode = Option.builder()
+			.longOpt("dev")
+			.desc("Enable development mode.")
+			.required(false)
+			.get();
+		options.addOption(devMode);
 		try {
 			CommandLineParser parser = new DefaultParser();
 			CommandLine cmd = parser.parse(options, args);
@@ -95,7 +101,7 @@ public class TS6AddonInstaller {
 				System.out.println("Version: " + VERSION);
 			} else if(cmd.hasOption(install)) {
 				requireSingleArg(cmd);
-				CLIController.install(cmd.getArgList().get(0), cmd.getOptionValue(install), cmd.hasOption(force));
+				CLIController.install(cmd.getArgList().get(0), cmd.getOptionValue(install), cmd.hasOption(force), cmd.hasOption(devMode));
 			} else if(cmd.hasOption(uninstall)) {
 				requireSingleArg(cmd);
 				CLIController.uninstall(cmd.getArgList().get(0), cmd.getOptionValue(uninstall));
@@ -107,7 +113,7 @@ public class TS6AddonInstaller {
 				CLIController.patch(cmd.getArgList().get(0));
 			} else {
 				Window.setupNativeLook();
-				MainController controller = new MainController();
+				MainController controller = new MainController(cmd.hasOption(devMode));
 				SwingUtilities.invokeLater(controller);
 			}
 		} catch(ParseException e) {

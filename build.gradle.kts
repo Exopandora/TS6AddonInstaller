@@ -41,6 +41,10 @@ dependencies {
 	implementation("org.dom4j:dom4j:2.1.5")
 }
 
+tasks.withType<JavaExec> {
+    args("--dev")
+}
+
 tasks.withType<Jar> {
 	manifest {
 		attributes(

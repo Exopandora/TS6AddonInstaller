@@ -1,5 +1,20 @@
 package com.github.exopandora.ts6ai.controller;
 
+import com.github.exopandora.ts6ai.util.SimpleDocumentListener;
+import com.github.exopandora.ts6ai.view.InstallDirPane;
+import com.github.exopandora.ts6ai.view.InstallPane;
+import com.github.exopandora.ts6ai.view.UninstallPane;
+import com.github.exopandora.ts6ai.view.Window;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.DocumentEvent;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import java.util.Optional;
+
+import static com.github.exopandora.ts6ai.TS6AddonInstaller.VERSION;
 import static com.github.exopandora.ts6ai.util.OS.LINUX;
 import static com.github.exopandora.ts6ai.util.OS.MAC_OS;
 import static com.github.exopandora.ts6ai.util.OS.OPERATING_SYSTEM;
@@ -8,21 +23,7 @@ import static com.github.exopandora.ts6ai.view.Window.TITLE;
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 import static javax.swing.JFileChooser.DIRECTORIES_ONLY;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
-
-import java.awt.event.ActionEvent;
-import java.io.File;
-import java.util.Optional;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.DocumentEvent;
-
-import com.github.exopandora.ts6ai.util.SimpleDocumentListener;
-import com.github.exopandora.ts6ai.view.InstallDirPane;
-import com.github.exopandora.ts6ai.view.InstallPane;
-import com.github.exopandora.ts6ai.view.UninstallPane;
-import com.github.exopandora.ts6ai.view.Window;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 
 public class MainController implements Runnable {
 	private String installDir = MainController.findTeamSpeakInstallDir().map(File::toString).orElseGet(() -> {
@@ -32,8 +33,10 @@ public class MainController implements Runnable {
 	});
 	private final Window window = new Window();
 	private final InstallController installController = new InstallController(this);
+	private final boolean devMode;
 	
-	public MainController() {
+	public MainController(boolean devMode) {
+		this.devMode = devMode;
 		this.window.getTabbedPane().addChangeListener(this::onTabChanged);
 		SimpleDocumentListener documentListener = new SimpleDocumentListener(this::onInstallDirChanged);
 		InstallPane installPane = this.installController.getInstallPane();
@@ -50,6 +53,9 @@ public class MainController implements Runnable {
 	@Override
 	public void run() {
 		this.window.showWindow();
+		if(!this.devMode && VERSION.equals("DEV")) {
+			JOptionPane.showMessageDialog(null, "Warning!\nThe installer version could not be loaded and development mode is not enabled.\nPlease report this to the issue tracker!", TITLE, WARNING_MESSAGE);
+		}
 	}
 	
 	private void onTabChanged(ChangeEvent event) {
@@ -81,6 +87,10 @@ public class MainController implements Runnable {
 	
 	public String getInstallDir() {
 		return this.installDir;
+	}
+	
+	public boolean isDevMode() {
+		return this.devMode;
 	}
 	
 	private static Optional<File> findTeamSpeakInstallDir() {
