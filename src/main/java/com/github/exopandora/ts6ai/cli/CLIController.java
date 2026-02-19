@@ -1,11 +1,5 @@
 package com.github.exopandora.ts6ai.cli;
 
-import java.io.File;
-import java.net.URI;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
-
 import com.github.exopandora.ts6ai.model.Addon;
 import com.github.exopandora.ts6ai.model.FolderAddonSource;
 import com.github.exopandora.ts6ai.model.IAddonSource;
@@ -14,9 +8,16 @@ import com.github.exopandora.ts6ai.model.Installer;
 import com.github.exopandora.ts6ai.model.LocalZipAddonSource;
 import com.github.exopandora.ts6ai.model.Patcher;
 import com.github.exopandora.ts6ai.model.RemoteZipAddonSource;
+import com.github.exopandora.ts6ai.model.Signer;
 import com.github.exopandora.ts6ai.model.VersionIndex;
 import com.github.exopandora.ts6ai.util.OS;
 import com.vdurmont.semver4j.Semver;
+
+import java.io.File;
+import java.net.URI;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
 
 public class CLIController {
 	public static void install(String installDir, String addonPath, boolean force) {
@@ -78,6 +79,8 @@ public class CLIController {
 			Installer.validateInstallationPath(installDir, true);
 			Semver ts6version = VersionIndex.findTeamSpeakVersion(installDir, OS.getOrThrow());
 			Patcher.patch(installDir, ts6version);
+			Signer.sign(installDir);
+			Signer.unsign(installDir);
 		} catch(Exception e) {
 			System.err.println(e.getMessage());
 		}
