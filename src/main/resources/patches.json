@@ -73,6 +73,36 @@
 						"vanilla": "45 31 E4",
 						"patched": "41 B4 01"
 					}
+				],
+				"alternatives": [
+					{
+						"vanilla": "c5c109cffcaada429a2da8ad3b5c0bc1",
+						"patched": "81283d501e1f0e4039b0f82ff19d17c1",
+						"unsigned": "c46df7a7037ddf2d7d5b2da47a37ccc8",
+						"signed": "895a4ecdb797cefa7e1eb64dbe1ba480",
+						"patches": [
+							{
+								"offset": "6B24D4",
+								"vanilla": "15 00 80 52",
+								"patched": "35 00 80 52"
+							},
+							{
+								"offset": "6B25A4",
+								"vanilla": "15 00 80 52",
+								"patched": "35 00 80 52"
+							},
+							{
+								"offset": "70220",
+								"vanilla": "15 00 80 52",
+								"patched": "35 00 80 52"
+							},
+							{
+								"offset": "702E0",
+								"vanilla": "15 00 80 52",
+								"patched": "35 00 80 52"
+							}
+						]
+					}
 				]
 			}
 		}

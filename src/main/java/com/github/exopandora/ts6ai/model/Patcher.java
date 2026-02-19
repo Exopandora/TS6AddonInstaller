@@ -55,6 +55,14 @@ public class Patcher {
 					if(result != 0) {
 						throw new Exception("Failed to remove app signature. Error code " + result);
 					}
+					Process signProcess = new ProcessBuilder()
+						.command("codesign", "-fs", "-", installDir)
+						.inheritIO()
+						.start();
+					int signResult = signProcess.waitFor();
+					if(signResult != 0) {
+						throw new Exception("Failed to ad-hoc sign app. Error code " + signResult);
+					}
 				} catch(Throwable e) {
 					revertPatches(successfulPatches);
 					throw new Exception("Could not remove app signature. Please make sure you started the installer with admin privileges.", e);
@@ -109,13 +117,35 @@ public class Patcher {
 			File file = new File(installDir, entry.getKey());
 			FilePatch patch = entry.getValue();
 			String md5 = Util.md5sum(file);
-			if(md5.equalsIgnoreCase(patch.getVanilla()) || patch.getMigrations().stream().anyMatch(md5::equalsIgnoreCase)) {
-				patchesToApply.add(new SimpleEntry<File, FilePatch>(file, patch));
-			} else if(!md5.equalsIgnoreCase(patch.getPatched()) && !md5.equalsIgnoreCase(patch.getUnsigned())) {
+			FilePatch resolved = resolvePatch(md5, patch);
+			if(resolved == null) {
 				throw new IllegalStateException("Corrupted file \"" + entry.getKey() + "\"");
+			}
+			if(md5.equalsIgnoreCase(resolved.getVanilla()) || resolved.getMigrations().stream().anyMatch(md5::equalsIgnoreCase)) {
+				patchesToApply.add(new SimpleEntry<File, FilePatch>(file, resolved));
 			}
 		}
 		return patchesToApply;
+	}
+
+	private static FilePatch resolvePatch(String md5, FilePatch patch) {
+		if(matchesAny(md5, patch)) {
+			return patch;
+		}
+		for(FilePatch alt : patch.getAlternatives()) {
+			if(matchesAny(md5, alt)) {
+				return alt;
+			}
+		}
+		return null;
+	}
+
+	private static boolean matchesAny(String md5, FilePatch patch) {
+		return md5.equalsIgnoreCase(patch.getVanilla())
+			|| md5.equalsIgnoreCase(patch.getPatched())
+			|| (patch.getUnsigned() != null && md5.equalsIgnoreCase(patch.getUnsigned()))
+			|| (patch.getSigned() != null && md5.equalsIgnoreCase(patch.getSigned()))
+			|| patch.getMigrations().stream().anyMatch(md5::equalsIgnoreCase);
 	}
 	
 	public static Optional<Map<String, FilePatch>> loadFilePatches(Semver ts6Version) throws Exception {
@@ -203,21 +233,27 @@ public class Patcher {
 			private final String vanilla;
 			private final String patched;
 			private final String unsigned;
+			private final String signed;
 			private final List<String> migrations;
 			private final List<Patch> patches;
-			
+			private final List<FilePatch> alternatives;
+
 			public FilePatch(
 				@JsonProperty("vanilla") String vanilla,
 				@JsonProperty("patched") String patched,
 				@JsonProperty("unsigned") String unsigned,
+				@JsonProperty("signed") String signed,
 				@JsonSetter(nulls = Nulls.AS_EMPTY) @JsonProperty("migrations") List<String> migrations,
-				@JsonProperty("patches") List<Patch> patches
+				@JsonProperty("patches") List<Patch> patches,
+				@JsonSetter(nulls = Nulls.AS_EMPTY) @JsonProperty("alternatives") List<FilePatch> alternatives
 			) {
 				this.vanilla = vanilla;
 				this.patched = patched;
 				this.unsigned = unsigned;
+				this.signed = signed;
 				this.migrations = migrations;
 				this.patches = patches;
+				this.alternatives = alternatives;
 			}
 			
 			public String getVanilla() {
@@ -231,6 +267,10 @@ public class Patcher {
 			public String getUnsigned() {
 				return this.unsigned;
 			}
+
+			public String getSigned() {
+				return this.signed;
+			}
 			
 			public List<String> getMigrations() {
 				return this.migrations;
@@ -239,10 +279,14 @@ public class Patcher {
 			public List<Patch> getPatches() {
 				return this.patches;
 			}
-			
+
+			public List<FilePatch> getAlternatives() {
+				return this.alternatives;
+			}
+
 			@Override
 			public int hashCode() {
-				return Objects.hash(this.vanilla, this.patched, this.unsigned, this.migrations, this.patches);
+				return Objects.hash(this.vanilla, this.patched, this.unsigned, this.signed, this.migrations, this.patches, this.alternatives);
 			}
 			
 			public static class Patch {
