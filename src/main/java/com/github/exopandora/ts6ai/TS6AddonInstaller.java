@@ -43,7 +43,7 @@ public class TS6AddonInstaller {
 		Options options = new Options();
 		Option patch = Option.builder()
 			.longOpt("patch")
-			.desc("Patches the TeamSpeak installation to enable addon support.")
+			.desc("Patches the TeamSpeak installation to enable addon support. On MacOs, the TeamSpeak installation will additionally be signed ad-hoc.")
 			.required(false)
 			.get();
 		options.addOption(patch);
