@@ -61,20 +61,19 @@ public class VersionIndex {
 	public static Semver findTeamSpeakVersion(String installDir, OS os) throws IOException, IllegalStateException {
 		InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("versions.json");
 		VersionIndex index = OBJECT_MAPPER.readValue(inputStream, VersionIndex.class);
-		String md5 = Util.md5sum(new File(installDir, resolveTeamSpeakExecutable(os)));
+		String md5 = Util.md5sum(new File(installDir, resolveVersionDiscriminatorFile(os)));
 		return index.getVersion(os, md5)
 			.map(version -> new Semver(version, SemverType.NPM))
 			.orElseThrow(() -> new IllegalStateException("Unsupported TeamSpeak version.\nTry updating the installer."));
 	}
 	
-	public static String resolveTeamSpeakExecutable(OS os) {
+	public static String resolveVersionDiscriminatorFile(OS os) {
 		switch(os) {
 			case WINDOWS:
-				return "TeamSpeak.exe";
 			case LINUX:
-				return "TeamSpeak";
+				return "html/client_ui/main.js";
 			case MAC_OS:
-				return "Contents/MacOS/TeamSpeak";
+				return "Contents/Resources/html/client_ui/main.js";
 		}
 		throw new IllegalArgumentException("Unknown operating system " + os);
 	}

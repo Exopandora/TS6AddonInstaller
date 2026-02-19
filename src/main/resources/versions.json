@@ -1,78 +1,23 @@
 {
 	"windows": {
-		"6.0.0-beta3.4": [
-			"9033032e297c2ba73dbb674a792adaac",
-			"e662ab279f636aba17c9e4c98489cf1c"
-		],
-		"6.0.0-beta3.2": [
-			"0898855c6427deb5ae0a4858d6e5598c",
-			"2e84f86d312569b1acdaa2b53e3d3019"
-		],
-		"6.0.0-beta3.1": [
-			"d01bad01d344cc5c277c724d1452ed87",
-			"074931ea8daba727ae107708bf13ff29"
-		],
-		"6.0.0-beta3": [
-			"f4e5bfc40b79598366bf4bee2406b446",
-			"7a1dcf208b35526daecfd492becf8add"
-		],
-		"6.0.0-beta2": [
-			"97150cbd83bf3bcbedd393aa8360ac2b",
-			"ce14c468dc3a676a4834256af2d8c660"
-		]
+		"6.0.0-beta3.4": [ "7738f7547413d1a35f793094577bafba" ],
+		"6.0.0-beta3.2": [ "d4ef6b3dd07943460b9911c1c07d01c6" ],
+		"6.0.0-beta3.1": [ "30621963bd4f8e547c281f3cf8f4cb1e" ],
+		"6.0.0-beta3": [ "ca14210a3741a99192bd878723e1aa96" ],
+		"6.0.0-beta2": [ "6fef8aaa8b6b19688fcbbef62279d4b2" ]
 	},
 	"linux": {
-		"6.0.0-beta3.4": [
-			"f4cc5691bab6590d3e331bcc8bcdad9d",
-			"621f548bceeb71bd5cc9256e06a26636"
-		],
-		"6.0.0-beta3.2": [
-			"eabe113d13d9793da6e1addd591815d1",
-			"3937dc90aaf506795b5fb0202b8b2503"
-		],
-		"6.0.0-beta3.1": [
-			"cf2b33a83c69705f991541279b640a05",
-			"d8febf33a0b1df8bc2d896cb9d2ff17e"
-		],
-		"6.0.0-beta3": [
-			"2138d9afcbf2f8cc938e51e0f884bb95",
-			"c644e1f07d95026a842a9905cf11e0ef"
-		],
-		"6.0.0-beta2": [
-			"66614666f7d51aadf0f179e784d1a212",
-			"c75efb6e2e5dba51d201a3b22fbd5f0b",
-			"94f195981e079f47bc30fb0286a90195"
-		]
+		"6.0.0-beta3.4": [ "7738f7547413d1a35f793094577bafba" ],
+		"6.0.0-beta3.2": [ "d4ef6b3dd07943460b9911c1c07d01c6" ],
+		"6.0.0-beta3.1": [ "30621963bd4f8e547c281f3cf8f4cb1e" ],
+		"6.0.0-beta3": [ "ca14210a3741a99192bd878723e1aa96" ],
+		"6.0.0-beta2": [ "e7d67efe01864ab94e8dd535012b649b" ]
 	},
 	"macos": {
-		"6.0.0-beta3.4": [
-			"7c289cb606b85dcd17b6a048ed912bbc",
-			"29b307a7f0a4c782eb07260695349a9e",
-			"b0c79eb926116a8e729d603f741c1760",
-			"c5c109cffcaada429a2da8ad3b5c0bc1",
-			"81283d501e1f0e4039b0f82ff19d17c1",
-			"c46df7a7037ddf2d7d5b2da47a37ccc8",
-			"895a4ecdb797cefa7e1eb64dbe1ba480"
-		],
-		"6.0.0-beta3.2": [
-			"b5aa2ba3f1a8970438c3e947cf70754e",
-			"d5f66720a58ea135caff259a8d8cf169",
-			"ef9be5262f539c80a0e1611ab4edb8ad"
-		],
-		"6.0.0-beta3.1": [
-			"272dc07545a902887a213b0b23ba1319",
-			"395442031d4e2aa3101151394c5ef730",
-			"e1201a0cff0e97c70ec5f93f887a4b9e"
-		],
-		"6.0.0-beta3": [
-			"a7552cbbbde09edf1980bac7f4934848",
-			"1b1c111456029371b524629148f2b32f",
-			"03a8084d4ae397fa9fc4e4c5d726b3c1"
-		],
-		"6.0.0-beta2": [
-			"eb1fa9d6b03100a16a769a69a2f94815",
-			"b902788dacf11135a7980056373a0929",
-			"501761569f154597c3476e126013c971"
-		]
+		"6.0.0-beta3.4": [ "7738f7547413d1a35f793094577bafba" ],
+		"6.0.0-beta3.2": [ "d4ef6b3dd07943460b9911c1c07d01c6" ],
+		"6.0.0-beta3.1": [ "30621963bd4f8e547c281f3cf8f4cb1e" ],
+		"6.0.0-beta3": [ "ca14210a3741a99192bd878723e1aa96" ],
+		"6.0.0-beta2": [ "ddeeedadb22d62ebabfb3414a38b2081" ]
 	}
 }
