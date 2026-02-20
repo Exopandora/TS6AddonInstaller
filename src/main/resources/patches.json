@@ -54,8 +54,8 @@
 		},
 		"macos": {
 			"Contents/MacOS/TeamSpeak": {
-				"vanilla": "7c289cb606b85dcd17b6a048ed912bbc",
-				"patched": "29b307a7f0a4c782eb07260695349a9e",
+				"vanilla": "33253aab6b01f611a0aa5877921ee82b",
+				"patched": "b0c79eb926116a8e729d603f741c1760",
 				"patches": [
 					{
 						"offset": "6A5DB7",
@@ -75,8 +75,8 @@
 				],
 				"alternatives": [
 					{
-						"vanilla": "c5c109cffcaada429a2da8ad3b5c0bc1",
-						"patched": "81283d501e1f0e4039b0f82ff19d17c1",
+						"vanilla": "323b524cd77ab63d6c15765ce069efce",
+						"patched": "c46df7a7037ddf2d7d5b2da47a37ccc8",
 						"patches": [
 							{
 								"offset": "6B24D4",
@@ -148,8 +148,8 @@
 		},
 		"macos": {
 			"Contents/MacOS/TeamSpeak": {
-				"vanilla": "b5aa2ba3f1a8970438c3e947cf70754e",
-				"patched": "d5f66720a58ea135caff259a8d8cf169",
+				"vanilla": "1d7dc0fe7a6b7f5cd2272eb3feeefedb",
+				"patched": "ef9be5262f539c80a0e1611ab4edb8ad",
 				"patches": [
 					{
 						"offset": "6A79DF",
@@ -214,8 +214,8 @@
 		},
 		"macos": {
 			"Contents/MacOS/TeamSpeak" : {
-				"vanilla" : "272dc07545a902887a213b0b23ba1319",
-				"patched" : "395442031d4e2aa3101151394c5ef730",
+				"vanilla" : "e1201a0cff0e97c70ec5f93f887a4b9e",
+				"patched" : "b2088cdeb07acc9b5e874c2fda66412e",
 				"patches" : [
 					{
 						"offset" : "6A53D3",
@@ -280,8 +280,8 @@
 		},
 		"macos": {
 			"Contents/MacOS/TeamSpeak": {
-				"vanilla": "a7552cbbbde09edf1980bac7f4934848",
-				"patched": "1b1c111456029371b524629148f2b32f",
+				"vanilla": "565ebecc0ce809b376e867c0146cc036",
+				"patched": "03a8084d4ae397fa9fc4e4c5d726b3c1",
 				"patches": [
 					{
 						"offset": "6A55DF",
@@ -295,78 +295,6 @@
 					},
 					{
 						"offset": "65357",
-						"vanilla": "45 31 E4",
-						"patched": "41 B4 01"
-					}
-				]
-			}
-		}
-	},
-	"6.0.0-beta2": {
-		"windows": {
-			"TeamSpeak.exe": {
-				"vanilla": "97150cbd83bf3bcbedd393aa8360ac2b",
-				"patched": "ce14c468dc3a676a4834256af2d8c660",
-				"patches": [
-					{
-						"offset": "CE6718",
-						"vanilla": "75",
-						"patched": "74"
-					},
-					{
-						"offset": "11C5433",
-						"vanilla": "32 FF",
-						"patched": "B7 01"
-					}
-				]
-			}
-		},
-		"linux": {
-			"TeamSpeak": {
-				"vanilla": "66614666f7d51aadf0f179e784d1a212",
-				"patched": "c75efb6e2e5dba51d201a3b22fbd5f0b",
-				"migrations": [
-					"94f195981e079f47bc30fb0286a90195"
-				],
-				"patches": [
-					{
-						"offset": "13F7162",
-						"vanilla": "31 ED A8 01 0F 84 67",
-						"patched": "40 B5 01 90 E9 68 FF"
-					},
-					{
-						"offset": "13F71AC",
-						"vanilla": "31 ED",
-						"patched": "90 90"
-					},
-					{
-						"offset": "1A39D8D",
-						"vanilla": "31 ED F6 44 24 20 01 74 13",
-						"patched": "BD 01 00 00 00 90 90 90 90"
-					}
-				]
-			}
-		},
-		"macos": {
-			"Contents/MacOS/TeamSpeak": {
-				"vanilla": "eb1fa9d6b03100a16a769a69a2f94815",
-				"patched": "b902788dacf11135a7980056373a0929",
-				"migrations": [
-					"501761569f154597c3476e126013c971"
-				],
-				"patches": [
-					{
-						"offset": "66F04C",
-						"vanilla": "31 DB",
-						"patched": "B3 01"
-					},
-					{
-						"offset": "4E83C",
-						"vanilla": "45 31 E4",
-						"patched": "41 B4 01"
-					},
-					{
-						"offset": "4E8FD",
 						"vanilla": "45 31 E4",
 						"patched": "41 B4 01"
 					}

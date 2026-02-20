@@ -7,7 +7,7 @@ public class Signer {
 		try {
 			if(OS.getOrThrow() == OS.MAC_OS) {
 				Process signProcess = new ProcessBuilder()
-					.command("codesign", "-fs", "-", installDir)
+					.command("codesign", "--deep", "-fs", "-", installDir)
 					.inheritIO()
 					.start();
 				int signResult = signProcess.waitFor();

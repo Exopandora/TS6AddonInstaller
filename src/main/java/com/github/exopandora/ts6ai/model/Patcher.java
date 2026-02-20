@@ -84,7 +84,7 @@ public class Patcher {
 			Files.move(patched.toPath(), file.toPath(), REPLACE_EXISTING);
 		} else {
 			Files.delete(patched.toPath());
-			throw new IllegalStateException("Patched file \"" + file.getName() + "\" failed validation check");
+			throw new IllegalStateException("Patched file \"" + file.getName() + "\" failed validation check. Expected " + filePatch.getPatched() + " but got " + md5);
 		}
 	}
 	

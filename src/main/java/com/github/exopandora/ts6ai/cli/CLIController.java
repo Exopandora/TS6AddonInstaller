@@ -78,11 +78,16 @@ public class CLIController {
 		try {
 			Installer.validateInstallationPath(installDir, true);
 			Semver ts6version = VersionIndex.findTeamSpeakVersion(installDir, OS.getOrThrow());
+			Signer.unsign(installDir);
 			Patcher.patch(installDir, ts6version);
 			Signer.sign(installDir);
-			Signer.unsign(installDir);
 		} catch(Exception e) {
-			System.err.println(e.getMessage());
+			System.err.print(e.getMessage());
+			if(e.getCause() != null) {
+				System.out.println(": " + e.getCause().getMessage());
+			} else {
+				System.out.println();
+			}
 		}
 	}
 	

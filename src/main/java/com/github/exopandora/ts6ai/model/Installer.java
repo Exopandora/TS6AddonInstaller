@@ -58,8 +58,6 @@ public class Installer {
 				throw new Exception("Addon " + addon.getName() + " requires installer version " + requirement);
 			}
 		}
-		Patcher.patch(installDir, ts6version);
-		Signer.unsign(installDir);
 		try {
 			String addonRoot = addonJsonPath.substring(0, addonJsonPath.length() - ADDON_DEFINITION_FILE_NAME.length());
 			String injectionString = addonSource.read(addonRoot + addon.getInject());
@@ -82,11 +80,13 @@ public class Installer {
 			String packedAddon = Packer.pack(addon, injectionString, addonSource, addonRoot);
 			String wrappedAddon = wrapAddonInject(packedAddon, addon, UUID.randomUUID());
 			index = addon.getInjectAt().inject(index, wrappedAddon, addon.getInjectionPoint(), installedAddons);
+			Signer.unsign(installDir);
+			Patcher.patch(installDir, ts6version);
 			IOUtils.writeFile(indexPath, index);
+			Signer.sign(installDir);
 		} catch(Exception e) {
-			throw new Exception("Error during installation (" + e.getMessage() + ")", e);
+			throw new Exception("Error during installation:\n" + e.getMessage(), e);
 		}
-		Signer.sign(installDir);
 		return Optional.of(addon);
 	}
 	
