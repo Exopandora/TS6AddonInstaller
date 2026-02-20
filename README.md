@@ -98,6 +98,8 @@ Currently, the following patches are included with the installer:
 - File validation bypass (does not include unknown file check bypass)
 - Domain validation bypass
 
+Please note that all hashes inside `patches.json` were computed when the app was unsigned.
+
 ## Building from source ##
 
 ### Prerequisites ###
@@ -110,10 +112,6 @@ Currently, the following patches are included with the installer:
 ### Universal jar ###
 1. Run `gradlew build` in the root directory of this repository
 2. The universal jar can be found in `./build/libs/`
-
-## Development note ##
-
-All hashes inside `patches.json` are computed when the app is an unsigned state.
 
 ## Acknowledgements
 Based on [TS5AddonInstaller](https://github.com/FelixVolo/TS5AddonInstaller) made by [FelixVolo](https://github.com/FelixVolo)
