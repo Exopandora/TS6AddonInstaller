@@ -41,8 +41,8 @@ public class Addon {
 		this.injectionPoint = injectionPoint != null ? injectionPoint : InjectionPoint.HEAD;
 		this.injectAt = injectAt != null ? injectAt : InjectAt.TAIL;
 		this.sources = Objects.requireNonNull(sources, "Missing addon sources");
-		this.installerVersion = Optional.ofNullable(installerVersion).map(RangeListFactory::create);
-		this.teamSpeakVersion = Optional.ofNullable(teamSpeakVersion).map(RangeListFactory::create);
+		this.installerVersion = Optional.ofNullable(installerVersion).map(Addon::parseRangeList);
+		this.teamSpeakVersion = Optional.ofNullable(teamSpeakVersion).map(Addon::parseRangeList);
 	}
 	
 	public String getName() {
@@ -79,5 +79,9 @@ public class Addon {
 	
 	public Optional<RangeList> getTeamSpeakVersion() {
 		return this.teamSpeakVersion;
+	}
+	
+	private static RangeList parseRangeList(String range) {
+		return RangeListFactory.create(range.replaceAll("\\|+", "||"));
 	}
 }
