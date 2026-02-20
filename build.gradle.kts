@@ -90,3 +90,13 @@ tasks.withType<AbstractArchiveTask> {
 	isPreserveFileTimestamps = false
 	isReproducibleFileOrder = true
 }
+
+dependencyAnalysis {
+    issues {
+        all {
+            onAny {
+                severity("fail")
+            }
+        }
+    }
+}
