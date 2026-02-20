@@ -106,6 +106,9 @@ dependencyAnalysis {
             onAny {
                 severity("fail")
             }
+            onUnusedDependencies {
+                exclude("org.junit.jupiter:junit-jupiter")
+            }
         }
     }
 }
