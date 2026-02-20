@@ -7,6 +7,7 @@ public enum OS {
 	LINUX("linux"),
 	MAC_OS("macos");
 
+	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 	public static final Optional<OS> OPERATING_SYSTEM = find();
 	
 	private final String name;

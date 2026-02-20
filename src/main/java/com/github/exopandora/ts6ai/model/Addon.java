@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class Addon {
 	private final String name;
 	private final String id;
