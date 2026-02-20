@@ -1,6 +1,5 @@
 package com.github.exopandora.ts6ai.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.github.exopandora.ts6ai.model.Addon;
 import com.github.exopandora.ts6ai.model.FolderAddonSource;
 import com.github.exopandora.ts6ai.model.IAddonSource;
@@ -12,6 +11,7 @@ import com.github.exopandora.ts6ai.view.AddonEntry;
 import com.github.exopandora.ts6ai.view.AddonEntry.RemoteAddonEntry;
 import com.github.exopandora.ts6ai.view.InstallPane;
 import org.semver4j.Semver;
+import tools.jackson.databind.JsonNode;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -57,8 +57,8 @@ public class InstallController {
 			JsonNode node = OBJECT_MAPPER.readTree(addonsJson);
 			List<AddonEntry> addons = new ArrayList<AddonEntry>();
 			for(Entry<String, JsonNode> entry : node.properties()) {
-				if(entry.getValue().isTextual()) {
-					addons.add(new RemoteAddonEntry(entry.getKey(), new URI(entry.getValue().asText()).toURL()));
+				if(entry.getValue().isString()) {
+					addons.add(new RemoteAddonEntry(entry.getKey(), new URI(entry.getValue().asString()).toURL()));
 				}
 			}
 			addons.sort(Comparator.comparing(AddonEntry::getName));

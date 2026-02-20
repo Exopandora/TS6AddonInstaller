@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.exopandora.ts6ai.model.Patcher.TS6Patch.FilePatch;
 import com.github.exopandora.ts6ai.model.Patcher.TS6Patch.FilePatch.Patch;
 import com.github.exopandora.ts6ai.util.OS;
 import com.github.exopandora.ts6ai.util.Util;
 import org.semver4j.Semver;
+import tools.jackson.core.type.TypeReference;
 
 import java.io.File;
 import java.io.IOException;

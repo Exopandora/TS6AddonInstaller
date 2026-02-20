@@ -1,10 +1,10 @@
 package com.github.exopandora.ts6ai.model;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.exopandora.ts6ai.util.IOUtils;
 import com.github.exopandora.ts6ai.util.OS;
 import org.semver4j.Semver;
 import org.semver4j.range.RangeList;
+import tools.jackson.core.type.TypeReference;
 
 import java.io.File;
 import java.io.IOException;

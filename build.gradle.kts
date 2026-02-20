@@ -36,7 +36,7 @@ application {
 
 dependencies {
 	implementation("commons-cli:commons-cli:1.11.0")
-	implementation("com.fasterxml.jackson.core:jackson-databind:2.20.0")
+	implementation("tools.jackson.core:jackson-databind:3.0.4")
 	implementation("org.semver4j:semver4j:6.0.0")
 	implementation("org.dom4j:dom4j:2.2.0")
 }

@@ -1,6 +1,6 @@
 package com.github.exopandora.ts6ai.util;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
