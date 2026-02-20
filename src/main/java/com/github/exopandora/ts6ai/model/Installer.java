@@ -107,14 +107,8 @@ public class Installer {
 	}
 	
 	private static String findAddonJsonPath(IAddonSource addonSource) throws IOException {
-		Iterator<String> entries = addonSource.entries();
-		while(entries.hasNext()) {
-			String entry = entries.next();
-			if(entry.endsWith(ADDON_DEFINITION_FILE_NAME)) {
-				return entry;
-			}
-		}
-		throw new IOException("Could not find addon.json");
+		return addonSource.findFile(entry -> entry.endsWith(ADDON_DEFINITION_FILE_NAME))
+			.orElseThrow(() -> new IOException("Could not find addon.json"));
 	}
 	
 	public static void validateInstallationPath(String path, boolean checkWritePermission) throws Exception {
