@@ -29,14 +29,15 @@ public class Packer {
 		Document document = reader.read(new StringReader("<addon>" + injectionString + "</addon>"));
 		Element root = document.getRootElement();
 		packElement(root, source, addonRoot, addon.getSources());
-		XMLWriter writer = new XMLWriter();
-		writer.setEscapeText(false);
-		StringWriter output = new StringWriter();
-		writer.setWriter(output);
-		for(Element element : root.elements()) {
-			writer.write(element);
+		try(XMLWriter writer = new XMLWriter()) {
+			writer.setEscapeText(false);
+			StringWriter output = new StringWriter();
+			writer.setWriter(output);
+			for(Element element : root.elements()) {
+				writer.write(element);
+			}
+			return output.toString();
 		}
-		return output.toString();
 	}
 	
 	private static void packElement(Element element, IAddonSource source, String addonRoot, String sources) throws IOException {

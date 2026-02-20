@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 import com.github.exopandora.ts6ai.util.IOUtils;
 
@@ -32,9 +33,10 @@ public class FolderAddonSource implements IAddonSource {
 	@Override
 	public Iterator<String> entries() throws IOException {
 		Path root = Paths.get(this.root);
-		return Files.walk(root)
-			.map(entry -> root.relativize(entry).toString())
-			.iterator();
+		try(Stream<Path> paths = Files.walk(root)) {
+			return paths.map(entry -> root.relativize(entry).toString())
+				.iterator();
+		}
 	}
 	
 	@Override

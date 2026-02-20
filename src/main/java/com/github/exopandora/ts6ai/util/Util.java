@@ -25,7 +25,7 @@ public class Util {
 	}
 	
 	public static String md5sum(InputStream inputStream) throws IOException {
-		try {
+		try(inputStream) {
 			MessageDigest md5Digest = MessageDigest.getInstance("MD5");
 			byte[] buffer = new byte[8192];
 			int length;
@@ -36,8 +36,6 @@ public class Util {
 			return bytesToHex(digest).toLowerCase();
 		} catch(NoSuchAlgorithmException e) {
 			throw new RuntimeException("Could not get md5 algorithm");
-		} finally {
-			inputStream.close();
 		}
 	}
 	
