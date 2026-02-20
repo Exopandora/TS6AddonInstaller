@@ -8,6 +8,9 @@ It features a builtin patcher to re-enable addon support for the latest versions
 ## Installing Addons ##
 The TS6 Addon Installer can automatically download and install addons or install them from zip files.
 
+### Requirements ###
+1. Java Runtime Environment 17 or later
+
 ### Automatic Download ###
 1. Select your TS6 installation directory
 2. Select the addon you want to install
