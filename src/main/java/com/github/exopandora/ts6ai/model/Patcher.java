@@ -189,19 +189,13 @@ public class Patcher {
 		
 		@JsonIgnore
 		public Optional<Map<String, FilePatch>> getFilePatches(OS os) {
-			Map<String, FilePatch> result = null;
-			switch(os) {
-				case WINDOWS:
-					result = this.windows;
-					break;
-				case LINUX:
-					result = this.linux;
-					break;
-				case MAC_OS:
-					result = this.macos;
-					break;
-			}
-			return Optional.ofNullable(result);
+			return Optional.ofNullable(
+				switch(os) {
+					case WINDOWS -> this.windows;
+					case LINUX -> this.linux;
+					case MAC_OS -> this.macos;
+				}
+			);
 		}
 		
 		public static class FilePatch {

@@ -36,19 +36,13 @@ public class VersionIndex {
 	
 	@JsonIgnore
 	public Optional<String> getVersion(OS os, String md5) {
-		String result = null;
-		switch(os) {
-			case WINDOWS:
-				result = this.windows.get().get(md5);
-				break;
-			case LINUX:
-				result = this.linux.get().get(md5);
-				break;
-			case MAC_OS:
-				result = this.macos.get().get(md5);
-				break;
-		}
-		return Optional.ofNullable(result);
+		return Optional.ofNullable(
+			switch(os) {
+				case WINDOWS -> this.windows.get().get(md5);
+				case LINUX -> this.linux.get().get(md5);
+				case MAC_OS -> this.macos.get().get(md5);
+			}
+		);
 	}
 	
 	private static Map<String, String> createLookup(Map<String, Set<String>> versionToHashes) {
@@ -67,13 +61,9 @@ public class VersionIndex {
 	}
 	
 	public static String resolveVersionDiscriminatorFile(OS os) {
-		switch(os) {
-			case WINDOWS:
-			case LINUX:
-				return "html/client_ui/main.js";
-			case MAC_OS:
-				return "Contents/Resources/html/client_ui/main.js";
-		}
-		throw new IllegalArgumentException("Unknown operating system " + os);
+		return switch(os) {
+			case WINDOWS, LINUX -> "html/client_ui/main.js";
+			case MAC_OS -> "Contents/Resources/html/client_ui/main.js";
+		};
 	}
 }
