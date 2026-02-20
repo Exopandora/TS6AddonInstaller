@@ -11,7 +11,7 @@ import com.github.exopandora.ts6ai.util.SimpleDocumentListener;
 import com.github.exopandora.ts6ai.view.AddonEntry;
 import com.github.exopandora.ts6ai.view.AddonEntry.RemoteAddonEntry;
 import com.github.exopandora.ts6ai.view.InstallPane;
-import com.vdurmont.semver4j.Semver;
+import org.semver4j.Semver;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;

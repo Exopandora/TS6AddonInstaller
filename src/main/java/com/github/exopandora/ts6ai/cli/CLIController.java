@@ -11,7 +11,7 @@ import com.github.exopandora.ts6ai.model.RemoteZipAddonSource;
 import com.github.exopandora.ts6ai.model.Signer;
 import com.github.exopandora.ts6ai.model.VersionIndex;
 import com.github.exopandora.ts6ai.util.OS;
-import com.vdurmont.semver4j.Semver;
+import org.semver4j.Semver;
 
 import java.io.File;
 import java.net.URI;

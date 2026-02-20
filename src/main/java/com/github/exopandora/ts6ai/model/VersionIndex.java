@@ -5,8 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.exopandora.ts6ai.util.Lazy;
 import com.github.exopandora.ts6ai.util.OS;
 import com.github.exopandora.ts6ai.util.Util;
-import com.vdurmont.semver4j.Semver;
-import com.vdurmont.semver4j.Semver.SemverType;
+import org.semver4j.Semver;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,7 +62,7 @@ public class VersionIndex {
 		VersionIndex index = OBJECT_MAPPER.readValue(inputStream, VersionIndex.class);
 		String md5 = Util.md5sum(new File(installDir, resolveVersionDiscriminatorFile(os)));
 		return index.getVersion(os, md5)
-			.map(version -> new Semver(version, SemverType.NPM))
+			.map(Semver::new)
 			.orElseThrow(() -> new IllegalStateException("Unsupported TeamSpeak version.\nTry updating the installer."));
 	}
 	

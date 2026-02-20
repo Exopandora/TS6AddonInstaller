@@ -1,6 +1,6 @@
 package com.github.exopandora.ts6ai.model;
 
-import com.vdurmont.semver4j.Semver;
+import org.semver4j.Semver;
 
 public class InstalledAddon {
 	private final String id;

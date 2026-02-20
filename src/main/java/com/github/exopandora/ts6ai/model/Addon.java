@@ -1,13 +1,14 @@
 package com.github.exopandora.ts6ai.model;
 
-import java.util.Objects;
-import java.util.Optional;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.exopandora.ts6ai.util.Util;
-import com.vdurmont.semver4j.Requirement;
-import com.vdurmont.semver4j.Semver;
+import org.semver4j.Semver;
+import org.semver4j.range.RangeList;
+import org.semver4j.range.RangeListFactory;
+
+import java.util.Objects;
+import java.util.Optional;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Addon {
@@ -18,8 +19,8 @@ public class Addon {
 	private final InjectionPoint injectionPoint;
 	private final InjectAt injectAt;
 	private final String sources;
-	private final Optional<Requirement> installerVersion;
-	private final Optional<Requirement> teamSpeakVersion;
+	private final Optional<RangeList> installerVersion;
+	private final Optional<RangeList> teamSpeakVersion;
 	
 	public Addon(
 		@JsonProperty("name") String name,
@@ -39,8 +40,8 @@ public class Addon {
 		this.injectionPoint = injectionPoint != null ? injectionPoint : InjectionPoint.HEAD;
 		this.injectAt = injectAt != null ? injectAt : InjectAt.TAIL;
 		this.sources = Objects.requireNonNull(sources, "Missing addon sources");
-		this.installerVersion = Optional.ofNullable(installerVersion).map(Requirement::buildNPM);
-		this.teamSpeakVersion = Optional.ofNullable(teamSpeakVersion).map(Requirement::buildNPM);
+		this.installerVersion = Optional.ofNullable(installerVersion).map(RangeListFactory::create);
+		this.teamSpeakVersion = Optional.ofNullable(teamSpeakVersion).map(RangeListFactory::create);
 	}
 	
 	public String getName() {
@@ -71,11 +72,11 @@ public class Addon {
 		return this.sources;
 	}
 	
-	public Optional<Requirement> getInstallerVersion() {
+	public Optional<RangeList> getInstallerVersion() {
 		return this.installerVersion;
 	}
 	
-	public Optional<Requirement> getTeamSpeakVersion() {
+	public Optional<RangeList> getTeamSpeakVersion() {
 		return this.teamSpeakVersion;
 	}
 }

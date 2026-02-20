@@ -3,8 +3,8 @@ package com.github.exopandora.ts6ai.model;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.exopandora.ts6ai.util.IOUtils;
 import com.github.exopandora.ts6ai.util.OS;
-import com.vdurmont.semver4j.Requirement;
-import com.vdurmont.semver4j.Semver;
+import org.semver4j.Semver;
+import org.semver4j.range.RangeList;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,13 +47,13 @@ public class Installer {
 			throw new Exception("Addon does not contain a valid " + ADDON_DEFINITION_FILE_NAME, e);
 		}
 		if(addon.getTeamSpeakVersion().isPresent()) {
-			Requirement requirement = addon.getTeamSpeakVersion().get();
+			RangeList requirement = addon.getTeamSpeakVersion().get();
 			if(!ts6version.satisfies(requirement)) {
 				throw new Exception("Addon " + addon.getName() + " requires TeamSpeak version " + requirement);
 			}
 		}
 		if(addon.getInstallerVersion().isPresent()) {
-			Requirement requirement = addon.getInstallerVersion().get();
+			RangeList requirement = addon.getInstallerVersion().get();
 			if(!new Semver(VERSION).satisfies(requirement) && !devMode) {
 				throw new Exception("Addon " + addon.getName() + " requires installer version " + requirement);
 			}

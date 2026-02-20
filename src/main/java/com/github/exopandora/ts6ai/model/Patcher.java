@@ -9,7 +9,7 @@ import com.github.exopandora.ts6ai.model.Patcher.TS6Patch.FilePatch;
 import com.github.exopandora.ts6ai.model.Patcher.TS6Patch.FilePatch.Patch;
 import com.github.exopandora.ts6ai.util.OS;
 import com.github.exopandora.ts6ai.util.Util;
-import com.vdurmont.semver4j.Semver;
+import org.semver4j.Semver;
 
 import java.io.File;
 import java.io.IOException;
