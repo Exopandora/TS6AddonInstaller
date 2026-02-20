@@ -16,7 +16,7 @@ public class Signer {
 				}
 			}
 		} catch(Exception e) {
-			throw new Exception("Could not create app signature. Please make sure you started the installer with elevated privileges.", e);
+			throw new Exception("Could not create app signature. Please make sure you have started the installer with elevated privileges.", e);
 		}
 	}
 	
@@ -33,7 +33,7 @@ public class Signer {
 				}
 			}
 		} catch(Exception e) {
-			throw new Exception("Could not remove app signature. Please make sure you started the installer with elevated privileges.", e);
+			throw new Exception("Could not remove app signature. Please make sure you have started the installer with elevated privileges.", e);
 		}
 	}
 }
