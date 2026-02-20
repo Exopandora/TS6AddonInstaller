@@ -93,8 +93,7 @@ public class InstallController {
 	private void selectAddon(ActionEvent event) {
 		Object selected = this.installPane.getAddonComboBox().getSelectedItem();
 		Boolean mode = null;
-		if(selected instanceof RemoteAddonEntry) {
-			RemoteAddonEntry addon = (RemoteAddonEntry) selected;
+		if(selected instanceof RemoteAddonEntry addon) {
 			JComboBox<Object> versionComboBox = this.installPane.getVersionComboBox();
 			versionComboBox.removeAllItems();
 			if(this.versionCache.containsKey(addon.getName())) {
@@ -213,8 +212,7 @@ public class InstallController {
 	
 	private IAddonSource getAddonSource() throws Exception {
 		AddonEntry selectedEntry = (AddonEntry) this.installPane.getAddonComboBox().getSelectedItem();
-		if(selectedEntry instanceof RemoteAddonEntry) {
-			RemoteAddonEntry remoteAddon = (RemoteAddonEntry) selectedEntry;
+		if(selectedEntry instanceof RemoteAddonEntry remoteAddon) {
 			Object selectedVersion = this.installPane.getVersionComboBox().getSelectedItem();
 			if(selectedVersion instanceof Semver) {
 				Map<Semver, String> versions = this.versionCache.get(remoteAddon.getName())
