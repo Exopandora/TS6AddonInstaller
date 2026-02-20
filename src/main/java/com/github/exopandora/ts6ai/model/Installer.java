@@ -94,7 +94,9 @@ public class Installer {
 		File indexPath = new File(installDir, resolveTeamSpeakResources(OS.getOrThrow()) + INDEX);
 		String index = IOUtils.readFile(indexPath);
 		index = removeAddonFromIndex(index, addon);
+		Signer.unsign(installDir);
 		IOUtils.writeFile(indexPath, index);
+		Signer.sign(installDir);
 	}
 	
 	private static String resolveTeamSpeakResources(OS os) {
