@@ -105,8 +105,8 @@ Please note that all hashes inside `patches.json` were computed when the app was
 
 ## Building from source ##
 
-### Prerequisites ###
-1. Java Development Kit 8 or later
+### Requirements ###
+1. Java Development Kit 17 or later
 
 ### Windows exe ###
 1. Run `gradlew createExe` in the root directory of this repository
