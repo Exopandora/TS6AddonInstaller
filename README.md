@@ -11,6 +11,16 @@ The TS6 Addon Installer can automatically download and install addons or install
 ### Requirements ###
 1. Java Runtime Environment 17 or later
 
+### Running the installer ###
+
+#### Windows exe ###
+1. Double-click the exe file
+
+#### Universal jar ####
+> [!NOTE]
+> Depending on your TS6 installation directory, you need to run the installer with elevated privileges
+1. Run `java -jar TS6AddonInstaller.jar`
+
 ### Automatic Download ###
 1. Select your TS6 installation directory
 2. Select the addon you want to install
