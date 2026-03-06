@@ -1,5 +1,6 @@
 package com.github.exopandora.ts6ai.controller;
 
+import com.github.exopandora.ts6ai.util.OS;
 import com.github.exopandora.ts6ai.util.SimpleDocumentListener;
 import com.github.exopandora.ts6ai.view.InstallDirPane;
 import com.github.exopandora.ts6ai.view.InstallPane;
@@ -55,6 +56,14 @@ public class MainController implements Runnable {
 		this.window.showWindow();
 		if(!this.devMode && VERSION.equals("DEV")) {
 			JOptionPane.showMessageDialog(null, "Warning!\nThe installer version could not be loaded and development mode is not enabled.\nPlease report this to the issue tracker!", TITLE, WARNING_MESSAGE);
+		}
+		try {
+			String arch = System.getProperty("os.arch");
+			if(OS.getOrThrow() == MAC_OS && (arch.contains("arm64") || arch.contains("aarch64"))) {
+				JOptionPane.showMessageDialog(null, "Warning!\nSupport for MacOS ARM is currently experimental.\nPlease report any issues to the issue tracker!", TITLE, WARNING_MESSAGE);
+			}
+		} catch(Exception e) {
+			throw new RuntimeException(e);
 		}
 	}
 	
