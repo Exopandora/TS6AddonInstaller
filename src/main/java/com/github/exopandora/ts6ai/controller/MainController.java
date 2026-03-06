@@ -16,10 +16,8 @@ import java.io.File;
 import java.util.Optional;
 
 import static com.github.exopandora.ts6ai.TS6AddonInstaller.VERSION;
-import static com.github.exopandora.ts6ai.util.OS.LINUX;
 import static com.github.exopandora.ts6ai.util.OS.MAC_OS;
 import static com.github.exopandora.ts6ai.util.OS.OPERATING_SYSTEM;
-import static com.github.exopandora.ts6ai.util.OS.WINDOWS;
 import static com.github.exopandora.ts6ai.view.Window.TITLE;
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 import static javax.swing.JFileChooser.DIRECTORIES_ONLY;
@@ -104,26 +102,30 @@ public class MainController implements Runnable {
 	
 	private static Optional<File> findTeamSpeakInstallDir() {
 		return OPERATING_SYSTEM.map(os -> {
-			if(WINDOWS.equals(os)) {
-				File file = new File(System.getenv("ProgramFiles"), "TeamSpeak");
-				if(file.exists()) {
-					return file;
+			switch(os) {
+				case WINDOWS -> {
+					File file = new File(System.getenv("ProgramFiles"), "TeamSpeak");
+					if(file.exists()) {
+						return file;
+					}
+					return new File(System.getenv("LOCALAPPDATA"), "Programs/TeamSpeak");
 				}
-				return new File(System.getenv("LOCALAPPDATA"), "Programs/TeamSpeak");
-			} else if(MAC_OS.equals(os)) {
-				return new File("/Applications/TeamSpeak.app");
-			} else if(LINUX.equals(os)) {
-				File file = new File(System.getProperty("user.home"), ".local/share/TeamSpeak");
-				if(file.exists()) {
-					return file;
+				case MAC_OS -> {
+					return new File("/Applications/TeamSpeak.app");
 				}
-				file = new File("/opt/TeamSpeak/");
-				if(file.exists()) {
-					return file;
+				case LINUX -> {
+					File file = new File(System.getProperty("user.home"), ".local/share/TeamSpeak");
+					if(file.exists()) {
+						return file;
+					}
+					file = new File("/opt/TeamSpeak/");
+					if(file.exists()) {
+						return file;
+					}
+					return new File(System.getProperty("user.home"), "Programs/TeamSpeak");
 				}
-				return new File(System.getProperty("user.home"), "Programs/TeamSpeak");
+				default -> throw new IllegalArgumentException("Unknown operating system " + os);
 			}
-			throw new IllegalArgumentException("Unknown operating system " + os);
 		});
 	}
 }
