@@ -50,16 +50,16 @@ The TS6 Addon Installer can be used from the command line with the following usa
 $ java -jar TS6AddonInstaller.jar [OPTIONS] <TEAMSPEAK_PATH>
 ```
 
-| Option           | Arguments | Description                                                                                              |
-|------------------|-----------|----------------------------------------------------------------------------------------------------------|
-| help, h          | n/a       | Displays a help text for command line usage                                                              |
-| version, v       | n/a       | Displays the version of the installer                                                                    |
-| install          | \<addon\> | Installs an addon from zip, folder or url, and applies patches to the TeamSpeak installation if required |
-| uninstall        | \<addon\> | Uninstalls an addon by id or name                                                                        |
-| list-installed v | n/a       | Displays installed addons                                                                                |
-| patch            | n/a       | Patches the TeamSpeak installation to enable addon support                                               |
-| yes, y           | n/a       | Automatically answers all prompts with 'yes'                                                             |
-| dev              | n/a       | Enable development mode                                                                                  |
+| Option         | Arguments | Description                                                                                              |
+|----------------|-----------|----------------------------------------------------------------------------------------------------------|
+| help, h        | n/a       | Displays a help text for command line usage                                                              |
+| version, v     | n/a       | Displays the version of the installer                                                                    |
+| install        | \<addon\> | Installs an addon from zip, folder or url, and applies patches to the TeamSpeak installation if required |
+| uninstall      | \<addon\> | Uninstalls an addon by id or name                                                                        |
+| list-installed | n/a       | Displays installed addons                                                                                |
+| patch          | n/a       | Patches the TeamSpeak installation to enable addon support                                               |
+| yes, y         | n/a       | Automatically answers all prompts with 'yes'                                                             |
+| dev            | n/a       | Enable development mode                                                                                  |
 
 ## Compatibility ##
 | TeamSpeak | Windows     | Linux       | MacOS (Intel) |
