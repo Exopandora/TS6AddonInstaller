@@ -82,6 +82,6 @@ public class Addon {
 	}
 	
 	private static RangeList parseRangeList(String range) {
-		return RangeListFactory.create(range.replaceAll("\\|+", "||"));
+		return RangeListFactory.create(range.replaceAll("\\|+", "||"), true);
 	}
 }
