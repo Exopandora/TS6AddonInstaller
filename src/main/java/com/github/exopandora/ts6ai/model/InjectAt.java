@@ -35,7 +35,7 @@ public enum InjectAt implements Injector {
 		List<Integer> indexes = new LinkedList<Integer>();
 		int index = string.indexOf(part);
 		while(index != -1 && index + 1 < string.length()) {
-			if(isOutsideAddonRegion(index, installedAddons)) {
+			if(!isInsideAddonRegion(index, installedAddons)) {
 				indexes.add(index);
 			}
 			index = string.indexOf(part, index + 1);
@@ -43,13 +43,13 @@ public enum InjectAt implements Injector {
 		return indexes;
 	}
 	
-	private static boolean isOutsideAddonRegion(int index, List<InstalledAddon> installedAddons) {
+	private static boolean isInsideAddonRegion(int index, List<InstalledAddon> installedAddons) {
 		for(InstalledAddon addon : installedAddons) {
-			if(index >= addon.getStartIndex() && index < addon.getEndIndex()) {
-				return false;
+			if(index > addon.getStartIndex() && index < addon.getEndIndex()) {
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 	
 	private static String insert(String string, String snippet, List<Integer> indexes, int offset) {
