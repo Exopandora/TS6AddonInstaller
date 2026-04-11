@@ -29,7 +29,7 @@ import static com.github.exopandora.ts6ai.util.Util.OBJECT_MAPPER;
 
 public class Installer {
 	private static final int SCHEMA_VERSION = 2;
-	private static final Pattern ADDON_START_REGEX = Pattern.compile("<!-- ADDON_START v(\\d+) ([A-Za-z_0-9]+) ([^ ]+) \"(.+)\" (?:([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}) )?-->");
+	private static final Pattern ADDON_START_REGEX = Pattern.compile("<!-- ADDON_START v(\\d+) ([A-Za-z_0-9]+) ([^ ]+) \"(.+?)\" (?:([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}) )?-->");
 	private static final String ADDON_END_STRING_V1 = "<!-- ADDON_END -->";
 	private static final String CLIENT_UI_PATH = "/html/client_ui/";
 	private static final String ADDON_DEFINITION_FILE_NAME = "addon.json";
