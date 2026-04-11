@@ -12,9 +12,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -64,18 +62,19 @@ public class Installer {
 			File indexPath = new File(installDir, resolveTeamSpeakResources(OS.getOrThrow()) + INDEX);
 			String index = IOUtils.readFile(indexPath);
 			List<InstalledAddon> installedAddons = findInstalledAddons(index);
-			Collections.reverse(installedAddons);
-			Iterator<InstalledAddon> installedAddonsIterator = installedAddons.iterator();
-			while(installedAddonsIterator.hasNext()) {
-				InstalledAddon installedAddon = installedAddonsIterator.next();
+			List<InstalledAddon> removedAddons = new ArrayList<InstalledAddon>();
+			for(InstalledAddon installedAddon : installedAddons) {
 				if(installedAddon.getId().equals(addon.getId())) {
 					int comparison = installedAddon.getVersion().compareTo(addon.getVersion());
 					if(!conflictHandler.resolve(addon, installedAddon, comparison)) {
 						return Optional.empty();
 					}
 					index = removeAddonFromIndex(index, installedAddon);
-					installedAddonsIterator.remove();
+					removedAddons.add(installedAddon);
 				}
+			}
+			if(!removedAddons.isEmpty()) {
+				installedAddons = updateInstalledAddonsList(installedAddons, removedAddons);
 			}
 			String packedAddon = Packer.pack(addon, injectionString, addonSource, addonRoot);
 			String wrappedAddon = wrapAddonInject(packedAddon, addon, UUID.randomUUID());
@@ -88,6 +87,23 @@ public class Installer {
 			throw new Exception("Error during installation:\n" + e.getMessage(), e);
 		}
 		return Optional.of(addon);
+	}
+	
+	private static List<InstalledAddon> updateInstalledAddonsList(List<InstalledAddon> installedAddons, List<InstalledAddon> removedAddons) {
+		List<InstalledAddon> result = new ArrayList<InstalledAddon>();
+		int offset = 0;
+		for(InstalledAddon installedAddon : installedAddons) {
+			if (removedAddons.contains(installedAddon)) {
+				offset += installedAddon.getEndIndex() - installedAddon.getStartIndex();
+			} else if(offset > 0) {
+				int startIndex = installedAddon.getStartIndex() - offset;
+				int endIndex = installedAddon.getEndIndex() - offset;
+				result.add(new InstalledAddon(installedAddon.getId(), installedAddon.getName(), installedAddon.getVersion(), startIndex, endIndex));
+			} else {
+				result.add(installedAddon);
+			}
+		}
+		return result;
 	}
 	
 	public static void uninstall(InstalledAddon addon, String installDir) throws Exception {
