@@ -110,7 +110,7 @@ public class TS6AddonInstaller {
 				CLIController.listInstalledAddons(cmd.getArgList().get(0));
 			} else if(cmd.hasOption(patch)) {
 				requireSingleArg(cmd);
-				CLIController.patch(cmd.getArgList().get(0));
+				CLIController.patch(cmd.getArgList().get(0), cmd.hasOption(devMode));
 			} else {
 				Window.setupNativeLook();
 				MainController controller = new MainController(cmd.hasOption(devMode));

@@ -80,7 +80,7 @@ public class Installer {
 			String wrappedAddon = wrapAddonInject(packedAddon, addon, UUID.randomUUID());
 			index = addon.getInjectAt().inject(index, wrappedAddon, addon.getInjectionPoint(), installedAddons);
 			Signer.unsign(installDir);
-			Patcher.patch(installDir, ts6version);
+			Patcher.patch(installDir, ts6version, !devMode);
 			IOUtils.writeFile(indexPath, index);
 			Signer.sign(installDir);
 		} catch(Exception e) {

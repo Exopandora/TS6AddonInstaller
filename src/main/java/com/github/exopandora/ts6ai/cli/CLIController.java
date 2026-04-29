@@ -74,12 +74,12 @@ public class CLIController {
 		throw new IllegalArgumentException("Invalid addon source");
 	}
 	
-	public static void patch(String installDir) {
+	public static void patch(String installDir, boolean devMode) {
 		try {
 			Installer.validateInstallationPath(installDir, true);
 			Semver ts6version = VersionIndex.findTeamSpeakVersion(installDir, OS.getOrThrow());
 			Signer.unsign(installDir);
-			Patcher.patch(installDir, ts6version);
+			Patcher.patch(installDir, ts6version, !devMode);
 			Signer.sign(installDir);
 		} catch(Exception e) {
 			System.err.print(e.getMessage());

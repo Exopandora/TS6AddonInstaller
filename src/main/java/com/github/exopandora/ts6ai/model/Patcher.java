@@ -31,14 +31,14 @@ import static java.nio.file.StandardCopyOption.COPY_ATTRIBUTES;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class Patcher {
-	public static void patch(String installDir, Semver ts6Version) throws Exception {
+	public static void patch(String installDir, Semver ts6Version, boolean validate) throws Exception {
 		Optional<Map<String, FilePatch>> filePatches = loadFilePatches(ts6Version);
 		if(filePatches.isPresent()) {
 			Set<Entry<File, FilePatch>> patchesToApply = filterFilePatches(installDir, filePatches.get());
 			Set<Entry<File, FilePatch>> successfulPatches = new HashSet<Entry<File, FilePatch>>();
 			for(Entry<File, FilePatch> entry : patchesToApply) {
 				try {
-					applyFilePatches(entry.getKey(), entry.getValue());
+					applyFilePatches(entry.getKey(), entry.getValue(), validate);
 					successfulPatches.add(entry);
 				} catch(Exception e) {
 					revertPatches(successfulPatches);
@@ -59,7 +59,7 @@ public class Patcher {
 		}
 	}
 	
-	private static void applyFilePatches(File file, FilePatch filePatch) throws IOException, IllegalStateException {
+	private static void applyFilePatches(File file, FilePatch filePatch, boolean validate) throws IOException, IllegalStateException {
 		File patched = Files.createTempFile("", "").toFile();
 		Files.copy(file.toPath(), patched.toPath(), COPY_ATTRIBUTES, REPLACE_EXISTING);
 		try(RandomAccessFile randomAccess = new RandomAccessFile(patched, "rw")) {
@@ -78,7 +78,7 @@ public class Patcher {
 		}
 		// Validate
 		String md5 = Util.md5sum(patched);
-		if(md5.equalsIgnoreCase(filePatch.getPatched())) {
+		if(!validate || md5.equalsIgnoreCase(filePatch.getPatched())) {
 			File backup = new File(file.getAbsolutePath() + ".bak");
 			Files.move(file.toPath(), backup.toPath(), REPLACE_EXISTING);
 			Files.move(patched.toPath(), file.toPath(), REPLACE_EXISTING);
