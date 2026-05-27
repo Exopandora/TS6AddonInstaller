@@ -66,12 +66,12 @@ $ java -jar TS6AddonInstaller.jar [OPTIONS] <TEAMSPEAK_PATH>
 |-----------|-------------|-------------|---------------|-------------|
 | Beta 4    | 3.6.0+      | 3.6.0+      | 3.6.0+        | 3.6.0+      |
 | Beta 3.4  | 3.4.0+      | 3.4.0+      | 3.4.0+        | 3.5.0+      |
-| Beta 3.3  | ❌           | ❌           | ❌             | ❌           |
-| Beta 3.2  | 3.3.0+      | 3.3.0+      | 3.3.0+        | ❌           |
-| Beta 3.1  | 3.2.0+      | 3.2.0+      | 3.2.0+        | ❌           |
-| Beta 3    | 3.1.0+      | 3.1.0+      | 3.1.0+        | ❌           |
-| Beta 2    | 3.0.0-3.4.0 | 3.0.0-3.4.0 | 3.0.0-3.4.0   | ❌           |
-| Beta 1    | ❌           | ❌           | ❌             | ❌           |
+| Beta 3.3  | -           | -           | -             | -           |
+| Beta 3.2  | 3.3.0+      | 3.3.0+      | 3.3.0+        | -           |
+| Beta 3.1  | 3.2.0+      | 3.2.0+      | 3.2.0+        | -           |
+| Beta 3    | 3.1.0+      | 3.1.0+      | 3.1.0+        | -           |
+| Beta 2    | 3.0.0-3.4.0 | 3.0.0-3.4.0 | 3.0.0-3.4.0   | -           |
+| Beta 1    | -           | -           | -             | -           |
 
 ## For Developers ##
 If you want your addon to be compatible with the TS6 Addon Installer you need to create a new file called `addon.json` for your addon.
