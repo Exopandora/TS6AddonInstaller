@@ -64,6 +64,7 @@ $ java -jar TS6AddonInstaller.jar [OPTIONS] <TEAMSPEAK_PATH>
 ## Compatibility ##
 | TeamSpeak | Windows     | Linux       | MacOS (Intel) | MacOS (ARM) |
 |-----------|-------------|-------------|---------------|-------------|
+| Beta 4.1  | 3.7.0+      | 3.7.0+      | 3.7.0+        | 3.7.0+      |
 | Beta 4    | 3.6.0+      | 3.6.0+      | 3.6.0+        | 3.6.0+      |
 | Beta 3.4  | 3.4.0+      | 3.4.0+      | 3.4.0+        | 3.5.0+      |
 | Beta 3.3  | -           | -           | -             | -           |
