@@ -8,7 +8,7 @@ plugins {
 	id("com.gradleup.shadow") version "9.3.1"
 }
 
-version = "3.6.0"
+version = "3.7.0"
 group = "com.github.exopandora"
 
 repositories {
