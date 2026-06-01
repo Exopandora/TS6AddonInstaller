@@ -3,5 +3,10 @@
 		"name": "BetterChat",
 		"version_index": "https://raw.githubusercontent.com/Exopandora/BetterChat/master/versions.json",
 		"website": "https://github.com/Exopandora/BetterChat"
+	},
+	{
+		"name": "Away Message Bookmarks",
+		"version_index": "https://raw.githubusercontent.com/Exopandora/AwayMessageBookmarks/master/versions.json",
+		"website": "https://github.com/Exopandora/AwayMessageBookmarks"
 	}
 ]
