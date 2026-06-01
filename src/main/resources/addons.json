@@ -8,5 +8,10 @@
 		"name": "Away Message Bookmarks",
 		"version_index": "https://raw.githubusercontent.com/Exopandora/AwayMessageBookmarks/master/versions.json",
 		"website": "https://github.com/Exopandora/AwayMessageBookmarks"
+	},
+	{
+		"name": "Debug Addon",
+		"version_index": "https://raw.githubusercontent.com/Exopandora/TS6DebugAddon/master/versions.json",
+		"website": "https://github.com/Exopandora/TS6DebugAddon"
 	}
 ]
