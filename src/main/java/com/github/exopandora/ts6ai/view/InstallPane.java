@@ -19,6 +19,7 @@ public class InstallPane extends JPanel implements InstallDirPane {
 	private final JButton selectInstallDirButton = new JButton("...");
 	private final JLabel addonLabel = new JLabel("Addon");
 	private final JComboBox<AddonEntry> addonComboBox = new JComboBox<AddonEntry>();
+	private final JButton addonWebsiteButton = new JButton("Website");
 	private final JLabel addonLocationLabel = new JLabel("Addon Location");
 	private final JTextField selectAddonLocationTextField = new JTextField();
 	private final JButton selectAddonLocationButton = new JButton("...");
@@ -64,12 +65,18 @@ public class InstallPane extends JPanel implements InstallDirPane {
 		this.add(this.addonLabel, addonLabelGbc);
 		
 		GridBagConstraints addonComboBoxGbc = new GridBagConstraints();
-		addonComboBoxGbc.gridwidth = 2;
-		addonComboBoxGbc.insets = new Insets(0, 0, 10, 10);
+		addonComboBoxGbc.insets = new Insets(0, 0, 10, 0);
 		addonComboBoxGbc.fill = HORIZONTAL;
 		addonComboBoxGbc.gridx = 1;
 		addonComboBoxGbc.gridy = 1;
 		this.add(this.addonComboBox, addonComboBoxGbc);
+		
+		GridBagConstraints addonWebsiteButtonGbc = new GridBagConstraints();
+		addonWebsiteButtonGbc.insets = new Insets(0, 0, 10, 10);
+		addonWebsiteButtonGbc.fill = HORIZONTAL;
+		addonWebsiteButtonGbc.gridx = 2;
+		addonWebsiteButtonGbc.gridy = 1;
+		this.add(this.addonWebsiteButton, addonWebsiteButtonGbc);
 		
 		GridBagConstraints addonFileLabelGbc = new GridBagConstraints();
 		addonFileLabelGbc.anchor = EAST;
@@ -88,6 +95,7 @@ public class InstallPane extends JPanel implements InstallDirPane {
 		
 		GridBagConstraints selectAddonFileButtonGbc = new GridBagConstraints();
 		selectAddonFileButtonGbc.insets = new Insets(0, 0, 10, 10);
+		selectAddonFileButtonGbc.fill = HORIZONTAL;
 		selectAddonFileButtonGbc.gridx = 2;
 		selectAddonFileButtonGbc.gridy = 2;
 		this.add(this.selectAddonLocationButton, selectAddonFileButtonGbc);
@@ -108,6 +116,7 @@ public class InstallPane extends JPanel implements InstallDirPane {
 		
 		GridBagConstraints loadVersionsButtonGbc = new GridBagConstraints();
 		loadVersionsButtonGbc.insets = new Insets(0, 0, 10, 10);
+		loadVersionsButtonGbc.fill = HORIZONTAL;
 		loadVersionsButtonGbc.gridx = 2;
 		loadVersionsButtonGbc.gridy = 3;
 		this.add(this.loadVersionsButton, loadVersionsButtonGbc);
@@ -139,6 +148,10 @@ public class InstallPane extends JPanel implements InstallDirPane {
 	
 	public JComboBox<AddonEntry> getAddonComboBox() {
 		return this.addonComboBox;
+	}
+	
+	public JButton getAddonWebsiteButton() {
+		return this.addonWebsiteButton;
 	}
 	
 	public JLabel getAddonLocationLabel() {

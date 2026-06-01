@@ -1,3 +1,7 @@
-{
-	"BetterChat": "https://raw.githubusercontent.com/Exopandora/BetterChat/master/versions.json"
-}
+[
+	{
+		"name": "BetterChat",
+		"version_index": "https://raw.githubusercontent.com/Exopandora/BetterChat/master/versions.json",
+		"website": "https://github.com/Exopandora/BetterChat"
+	}
+]

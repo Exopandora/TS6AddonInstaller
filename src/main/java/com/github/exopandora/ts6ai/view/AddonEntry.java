@@ -1,5 +1,7 @@
 package com.github.exopandora.ts6ai.view;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.net.URL;
 
 public class AddonEntry {
@@ -20,14 +22,24 @@ public class AddonEntry {
 	
 	public static class RemoteAddonEntry extends AddonEntry {
 		private final URL versionIndex;
+		private final URL website;
 		
-		public RemoteAddonEntry(String name, URL versionIndex) {
+		public RemoteAddonEntry(
+			@JsonProperty("name") String name,
+			@JsonProperty("version_index") URL versionIndex,
+			@JsonProperty("website") URL website
+		) {
 			super(name);
 			this.versionIndex = versionIndex;
+			this.website = website;
 		}
 		
 		public URL getVersionIndex() {
 			return this.versionIndex;
+		}
+		
+		public URL getWebsite() {
+			return this.website;
 		}
 	}
 }

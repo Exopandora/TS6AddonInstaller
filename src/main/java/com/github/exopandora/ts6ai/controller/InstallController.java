@@ -11,18 +11,18 @@ import com.github.exopandora.ts6ai.view.AddonEntry;
 import com.github.exopandora.ts6ai.view.AddonEntry.RemoteAddonEntry;
 import com.github.exopandora.ts6ai.view.InstallPane;
 import org.semver4j.Semver;
-import tools.jackson.databind.JsonNode;
+import tools.jackson.core.type.TypeReference;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -54,13 +54,7 @@ public class InstallController {
 		addonComboBox.addActionListener(this::selectAddon);
 		try {
 			InputStream addonsJson = Thread.currentThread().getContextClassLoader().getResourceAsStream("addons.json");
-			JsonNode node = OBJECT_MAPPER.readTree(addonsJson);
-			List<AddonEntry> addons = new ArrayList<AddonEntry>();
-			for(Entry<String, JsonNode> entry : node.properties()) {
-				if(entry.getValue().isString()) {
-					addons.add(new RemoteAddonEntry(entry.getKey(), new URI(entry.getValue().asString()).toURL()));
-				}
-			}
+			List<RemoteAddonEntry> addons = OBJECT_MAPPER.readValue(addonsJson, new TypeReference<List<RemoteAddonEntry>>() {});
 			addons.sort(Comparator.comparing(AddonEntry::getName));
 			addons.forEach(addonComboBox::addItem);
 		} catch(Exception e) {
@@ -69,6 +63,7 @@ public class InstallController {
 		addonComboBox.addItem(new AddonEntry("Local Addon"));
 		addonComboBox.setSelectedIndex(0);
 		this.installPane.getLoadVersionsButton().addActionListener(this::loadVersions);
+		this.installPane.getAddonWebsiteButton().addActionListener(this::visitWebsite);
 		this.installPane.getInstallButton().addActionListener(this::install);
 	}
 	
@@ -109,6 +104,7 @@ public class InstallController {
 		}
 		if(isLocalAddon != null) {
 			this.installPane.getAddonLocationLabel().setEnabled(isLocalAddon);
+			this.installPane.getAddonWebsiteButton().setEnabled(!isLocalAddon);
 			this.installPane.getSelectAddonLocationTextField().setEnabled(isLocalAddon);
 			this.installPane.getSelectAddonLocationButton().setEnabled(isLocalAddon);
 			this.installPane.getVersionLabel().setVisible(!isLocalAddon);
@@ -195,6 +191,17 @@ public class InstallController {
 			}
 		};
 		worker.execute();
+	}
+	
+	private void visitWebsite(ActionEvent event) {
+		AddonEntry selectedEntry = (AddonEntry) this.installPane.getAddonComboBox().getSelectedItem();
+		if(selectedEntry instanceof RemoteAddonEntry remoteAddon) {
+			try {
+				Desktop.getDesktop().browse(remoteAddon.getWebsite().toURI());
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public void updateInterface() {
