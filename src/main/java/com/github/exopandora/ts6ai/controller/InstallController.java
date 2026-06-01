@@ -92,7 +92,7 @@ public class InstallController {
 	
 	private void selectAddon(ActionEvent event) {
 		Object selected = this.installPane.getAddonComboBox().getSelectedItem();
-		Boolean mode = null;
+		Boolean isLocalAddon = null;
 		if(selected instanceof RemoteAddonEntry addon) {
 			JComboBox<Object> versionComboBox = this.installPane.getVersionComboBox();
 			versionComboBox.removeAllItems();
@@ -103,20 +103,20 @@ public class InstallController {
 			} else {
 				versionComboBox.addItem("Latest");
 			}
-			mode = false;
+			isLocalAddon = false;
 		} else if(selected instanceof AddonEntry) {
-			mode = true;
+			isLocalAddon = true;
 		}
-		if(mode != null) {
-			this.installPane.getAddonLocationLabel().setEnabled(mode);
-			this.installPane.getSelectAddonLocationTextField().setEnabled(mode);
-			this.installPane.getSelectAddonLocationButton().setEnabled(mode);
-			this.installPane.getVersionLabel().setVisible(!mode);
-			this.installPane.getVersionComboBox().setVisible(!mode);
-			this.installPane.getLoadVersionsButton().setVisible(!mode);
-			this.installPane.getAddonLocationLabel().setVisible(mode);
-			this.installPane.getSelectAddonLocationTextField().setVisible(mode);
-			this.installPane.getSelectAddonLocationButton().setVisible(mode);
+		if(isLocalAddon != null) {
+			this.installPane.getAddonLocationLabel().setEnabled(isLocalAddon);
+			this.installPane.getSelectAddonLocationTextField().setEnabled(isLocalAddon);
+			this.installPane.getSelectAddonLocationButton().setEnabled(isLocalAddon);
+			this.installPane.getVersionLabel().setVisible(!isLocalAddon);
+			this.installPane.getVersionComboBox().setVisible(!isLocalAddon);
+			this.installPane.getLoadVersionsButton().setVisible(!isLocalAddon);
+			this.installPane.getAddonLocationLabel().setVisible(isLocalAddon);
+			this.installPane.getSelectAddonLocationTextField().setVisible(isLocalAddon);
+			this.installPane.getSelectAddonLocationButton().setVisible(isLocalAddon);
 		}
 		this.updateInterface();
 	}
