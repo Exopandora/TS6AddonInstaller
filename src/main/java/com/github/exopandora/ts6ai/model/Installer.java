@@ -46,7 +46,7 @@ public class Installer {
 		}
 		if(addon.getTeamSpeakVersion().isPresent()) {
 			RangeList requirement = addon.getTeamSpeakVersion().get();
-			if(!ts6version.satisfies(requirement)) {
+			if(!ts6version.satisfies(requirement) && !devMode) {
 				throw new Exception("Addon " + addon.getName() + " requires TeamSpeak version " + requirement);
 			}
 		}
