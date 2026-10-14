@@ -5,7 +5,7 @@ plugins {
 	id("eclipse")
 	id("idea")
 	id("edu.sc.seis.launch4j") version "4.0.0"
-	id("com.gradleup.shadow") version "9.3.1"
+	id("com.gradleup.shadow") version "9.6.1"
 }
 
 version = "3.8.0"
