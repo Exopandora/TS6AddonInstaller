@@ -59,7 +59,7 @@ $ java -jar TS6AddonInstaller.jar [OPTIONS] <TEAMSPEAK_PATH>
 | list-installed | n/a       | Displays installed addons                                                                                |
 | patch          | n/a       | Patches the TeamSpeak installation to enable addon support                                               |
 | yes, y         | n/a       | Automatically answers all prompts with 'yes'                                                             |
-| dev            | n/a       | Enable development mode                                                                                  |
+| dev            | n/a       | Enables development mode                                                                                 |
 
 ## Compatibility ##
 | TeamSpeak | Windows     | Linux       | MacOS (Intel) | MacOS (ARM) |

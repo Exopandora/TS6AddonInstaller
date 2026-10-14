@@ -88,7 +88,7 @@ public class TS6AddonInstaller {
 		options.addOption(version);
 		Option devMode = Option.builder()
 			.longOpt("dev")
-			.desc("Enable development mode.")
+			.desc("Enables development mode.")
 			.required(false)
 			.get();
 		options.addOption(devMode);
