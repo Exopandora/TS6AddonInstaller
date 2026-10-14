@@ -31,13 +31,14 @@ public class MainController implements Runnable {
 		return null;
 	});
 	private final Window window = new Window();
-	private final InstallController installController = new InstallController(this);
+	private final InstallController installController;
 	private final boolean devMode;
 	
 	public MainController(boolean devMode) {
 		this.devMode = devMode;
 		this.window.getTabbedPane().addChangeListener(this::onTabChanged);
 		SimpleDocumentListener documentListener = new SimpleDocumentListener(this::onInstallDirChanged);
+		this.installController = new InstallController(this);
 		InstallPane installPane = this.installController.getInstallPane();
 		installPane.getInstallDirTextField().setText(this.installDir);
 		installPane.getInstallDirTextField().getDocument().addDocumentListener(documentListener);
