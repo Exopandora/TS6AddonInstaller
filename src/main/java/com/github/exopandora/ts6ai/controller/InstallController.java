@@ -55,6 +55,9 @@ public class InstallController {
 		try {
 			InputStream addonsJson = Thread.currentThread().getContextClassLoader().getResourceAsStream("addons.json");
 			List<RemoteAddonEntry> addons = OBJECT_MAPPER.readValue(addonsJson, new TypeReference<List<RemoteAddonEntry>>() {});
+			if (!mainController.isDevMode()) {
+				addons.removeIf(RemoteAddonEntry::isDevModeExclusive);
+			}
 			addons.sort(Comparator.comparing(AddonEntry::getName));
 			addons.forEach(addonComboBox::addItem);
 		} catch(Exception e) {
