@@ -5,6 +5,10 @@ It features a builtin patcher to re-enable addon support for the latest versions
 > [!IMPORTANT]
 > Addons need to be reinstalled after every TeamSpeak update
 
+## Disclaimer ##
+Since the release of TeamSpeak-beta5, client modifications violate the Terms of Service.
+Use at your own risk!
+
 ## Installing Addons ##
 The TS6 Addon Installer can automatically download and install addons or install them from zip files.
 
