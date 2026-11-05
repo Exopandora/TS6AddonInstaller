@@ -1,5 +1,6 @@
 {
 	"windows": {
+		"6.0.0-beta5.1": [ "e5b0d9063076515d826c82b690f8bc13" ],
 		"6.0.0-beta5": [ "d5f22b19d42fea92c33d5d5a9fddc46d" ],
 		"6.0.0-beta4.1": [ "ab4fd33a8e1fa31561bafa11f5401ba1" ],
 		"6.0.0-beta4": [ "c6f0e1d7d538385c27b6eb332abfb73a" ],
@@ -9,6 +10,7 @@
 		"6.0.0-beta3": [ "ca14210a3741a99192bd878723e1aa96" ]
 	},
 	"linux": {
+		"6.0.0-beta5.1": [ "e5b0d9063076515d826c82b690f8bc13" ],
 		"6.0.0-beta5": [ "d5f22b19d42fea92c33d5d5a9fddc46d" ],
 		"6.0.0-beta4.1": [ "ab4fd33a8e1fa31561bafa11f5401ba1" ],
 		"6.0.0-beta4": [ "c6f0e1d7d538385c27b6eb332abfb73a" ],
@@ -18,6 +20,7 @@
 		"6.0.0-beta3": [ "ca14210a3741a99192bd878723e1aa96" ]
 	},
 	"macos": {
+		"6.0.0-beta5.1": [ "e5b0d9063076515d826c82b690f8bc13" ],
 		"6.0.0-beta5": [ "d5f22b19d42fea92c33d5d5a9fddc46d" ],
 		"6.0.0-beta4.1": [ "ab4fd33a8e1fa31561bafa11f5401ba1" ],
 		"6.0.0-beta4": [ "c6f0e1d7d538385c27b6eb332abfb73a" ],

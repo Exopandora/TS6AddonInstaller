@@ -1,4 +1,109 @@
 {
+	"6.0.0-beta5.1": {
+		"windows": {
+			"TeamSpeak.exe": {
+				"vanilla": "5ccc06a22c1cb10415238e11f2811b98",
+				"patched": "a27380ea074257775b1df19489edb148",
+				"patches": [
+					{
+						"offset": "248D5",
+						"vanilla": "89 C6 85 C0 0F 84 B5 FC FF FF 89 F0",
+						"patched": "B8 00 00 00 00 89 C6 E9 B3 FC FF FF"
+					}
+				]
+			},
+			"TeamSpeak.dll": {
+				"vanilla": "716915e35f6012b4dd04402ade42892d",
+				"patched": "4c668ed5e4c332c2bc8f78d11c18094f",
+				"patches": [
+					{
+						"offset": "D09208",
+						"vanilla": "75",
+						"patched": "74"
+					},
+					{
+						"offset": "12EA7D9",
+						"vanilla": "32 DB",
+						"patched": "B3 01"
+					}
+				]
+			}
+		},
+		"linux": {
+			"TeamSpeak": {
+				"vanilla": "646ea58abd05ea63b7746277e6123fcb",
+				"patched": "1e2ceddf992f4dd0bd1b9dd597e46ad8",
+				"patches": [
+					{
+						"offset": "192AD81",
+						"vanilla": "31 ED A8 01 75 85",
+						"patched": "40 B5 01 90 90 90"
+					},
+					{
+						"offset": "192ADE3",
+						"vanilla": "31 ED",
+						"patched": "90 90"
+					},
+					{
+						"offset": "24E31A0",
+						"vanilla": "F6 44 24 20 01 75",
+						"patched": "BD 01 00 00 00 EB"
+					}
+				]
+			}
+		},
+		"macos": {
+			"Contents/MacOS/TeamSpeak": {
+				"vanilla": "0d6393f7d6faa105e9408b86cdaed944",
+				"patched": "888736c7479e0da0aa204e1149c10e6c",
+				"patches": [
+					{
+						"offset": "41D5D",
+						"vanilla": "45 31 FF",
+						"patched": "41 B7 01"
+					},
+					{
+						"offset": "41D91",
+						"vanilla": "45 31 FF",
+						"patched": "41 B7 01"
+					},
+					{
+						"offset": "BFEFEA",
+						"vanilla": "45 31 F6",
+						"patched": "41 B6 01"
+					}
+				],
+				"alternatives": [
+					{
+						"vanilla": "de828d1324a371b25715a7faf6bea9fc",
+						"patched": "1f2007dd61e445de149ce335884b0cab",
+						"patches": [
+							{
+								"offset": "40B68",
+								"vanilla": "15 00 80 52",
+								"patched": "35 00 80 52"
+							},
+							{
+								"offset": "40B94",
+								"vanilla": "15 00 80 52",
+								"patched": "35 00 80 52"
+							},
+							{
+								"offset": "B70D90",
+								"vanilla": "15 00 80 52",
+								"patched": "35 00 80 52"
+							},
+							{
+								"offset": "B70E78",
+								"vanilla": "15 00 80 52",
+								"patched": "35 00 80 52"
+							}
+						]
+					}
+				]
+			}
+		}
+	},
 	"6.0.0-beta5": {
 		"windows": {
 			"TeamSpeak.exe": {
